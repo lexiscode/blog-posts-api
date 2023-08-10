@@ -30,7 +30,6 @@ This backend API has been meticulously designed to fulfill these requirements an
 - **Thumbnail Handling**
 - **API Documentation**
 - **Contributing**
-- **License**
 
 ## Getting Started
 
@@ -164,9 +163,6 @@ The API endpoints and their usage are documented using Swagger and can be access
 
 ## Contributing
 Contributions are welcome! Please follow the CONTRIBUTING guidelines.
-
-## License
-This project is licensed under the MIT License.
 
 
 
