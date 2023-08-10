@@ -1,0 +1,59 @@
+{
+  "name": "adriansuter/php-autoload-override",
+  "description": "Override global scoped fully qualified function calls inside your class methods in order to be able to mock them during testing.",
+  "type": "library",
+  "homepage": "https://adriansuter.github.io/php-autoload-override/",
+  "keywords": [
+    "php",
+    "testing",
+    "override"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Adrian Suter",
+      "email": "adrian@suter-wirz.ch"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/adriansuter/php-autoload-override/issues"
+  },
+  "autoload": {
+    "psr-4": {
+      "AdrianSuter\\Autoload\\Override\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "My\\Integration\\": "tests/integration/src",
+      "AdrianSuter\\Autoload\\Override\\": "tests/integration/src-override",
+      "AdrianSuter\\Autoload\\Override\\Tests\\": "tests"
+    },
+    "classmap": [
+      "tests/integration/src/TestClassMapOverride"
+    ]
+  },
+  "require": {
+    "php": "^7.3 || ^8.0",
+    "nikic/php-parser": "^4.4"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.4",
+    "phpunit/phpunit": "^9.5",
+    "phpspec/prophecy-phpunit": "^2.0",
+    "squizlabs/php_codesniffer": "^3.6"
+  },
+  "scripts": {
+    "test": [
+      "@phpunit",
+      "@phpcs",
+      "@phpstan"
+    ],
+    "phpunit": "phpunit",
+    "phpcs": "phpcs",
+    "phpstan": "phpstan analyse src --memory-limit=-1 --xdebug"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
