@@ -12,7 +12,7 @@ use Slim\Factory\AppFactory;
  */
 $app->get('/posts', function (Request $request, Response $response) {
 
-    $sql = "SELECT p.id, p.title, p.content, p.thumbnail, p.author, p.posted_at,
+    $sql = "SELECT p.id, p.title, p.slug, p.content, p.thumbnail, p.author, p.posted_at,
                    c.id AS category_id, c.name AS category_name, c.description AS category_description
             FROM posts p
             LEFT JOIN posts_categories pc 
@@ -37,6 +37,7 @@ $app->get('/posts', function (Request $request, Response $response) {
                 $post = [
                     'id' => $postId,
                     'title' => $row['title'],
+                    'slug' => $row['slug'],
                     'content' => $row['content'],
                     'thumbnail' => $row['thumbnail'],
                     'author' => $row['author'],
