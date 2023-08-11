@@ -4,7 +4,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
-use Tuupola\Middleware\JwtAuthentication;
 use Firebase\JWT\JWT;
 
 
@@ -55,7 +54,7 @@ try{
     }
 
     // Generate JWT token
-    $secret_key = "SpslTAT3s09W9LjOgt9LQ7VTpSYsZoGD5Zcg0oK3x5U="; // Replace with your secret key
+    $secret_key = "SpslTAT3s09W9LjOgt9LQ7VTpSYsZoGD5Zcg0oK3x5U="; 
     $payload = [
         "email" => $email,
         "exp" => time() + 3600, // Token expiration time (1 hour)
