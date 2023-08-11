@@ -6,6 +6,12 @@ use Slim\Factory\AppFactory;
 
 use Firebase\JWT\JWT;
 
+use Respect\Validation\Validator as v;
+use App\Validation\Validator;
+use App\Requests\CustomRequestHandler;
+use App\Response\CustomResponse;
+
+
 
 /**
  * Login and generate a JWT Token
@@ -27,6 +33,25 @@ if ($data === null) {
 // $data = $request->getParsedBody();
 $email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
 $password = filter_var($data['password'], FILTER_SANITIZE_STRING);
+
+
+// Lets instantiate Validator and CustomResponse classes
+$validator = new Validator();
+$customResponse = new CustomResponse();
+
+// It starts by validating the input data using the $validator.
+$validator->validate($request,[
+    "email"=>v::notEmpty()->email(),
+    "password"=>v::notEmpty()
+]);
+
+// If validation fails, the method returns a 400 response with the validation errors using the $customResponse.
+if($validator->failed())
+{
+    $responseMessage = $validator->errors;
+    return $customResponse->is400Response($response,$responseMessage);
+}
+
 
 // Retrieve user data from the database
 $sql = "SELECT id, password FROM users WHERE email = :email";
@@ -110,6 +135,30 @@ if ($data === null) {
 $email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
 $password = filter_var($data['password'], FILTER_SANITIZE_STRING);
 $password = password_hash($password, PASSWORD_DEFAULT);
+
+
+// Lets instantiate the Validator and CustomResponse classes
+$validator = new Validator();
+$customResponse = new CustomResponse();
+
+// It starts by validating the input data using the $validator.
+$validator->validate($request,[
+    "email"=>v::notEmpty()->email(),
+    "password"=>v::notEmpty()
+]);
+
+// If validation fails, the method returns a 400 response with the validation errors using the $customResponse.
+if($validator->failed())
+{
+    $responseMessage = $validator->errors;
+    return $customResponse->is400Response($response,$responseMessage);
+}
+
+// It checks if the provided email already exists in the database. 
+
+
+
+
 
 // Insert user data into the database
 $sql = "INSERT INTO users (email, password) VALUES (:email, :password)";
