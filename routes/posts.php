@@ -289,6 +289,7 @@ $app->patch('/posts/edit/{id}', function (Request $request, Response $response, 
     // Get the JSON content from the request body
     $jsonBody = $request->getBody();
     $data = json_decode($jsonBody, true);
+    
     // Check if JSON decoding was successful
     if ($data === null) {
         // Invalid JSON data
@@ -300,7 +301,7 @@ $app->patch('/posts/edit/{id}', function (Request $request, Response $response, 
     // Check if the resource ID exists for posts
     if (!resourceExistsPost($id)) {
         $errorResponse = array(
-            "error-message" => "Resource not found with this.",
+            "error-message" => "Resource not found with this ID.",
             "resource-id" => $id
         );
         $response->getBody()->write(json_encode($errorResponse));
@@ -319,7 +320,23 @@ $app->patch('/posts/edit/{id}', function (Request $request, Response $response, 
         } elseif ($field === 'content') {
             $value = filter_var($value, FILTER_SANITIZE_STRING);
         } elseif ($field === 'thumbnail') {
-            $value = htmlspecialchars($value);
+            // Update the thumbnail if provided
+            $thumbnailBase64 = $data['thumbnail'];
+            $thumbnailData = base64_decode($thumbnailBase64);
+            $thumbnailFilename = uniqid() . '.png'; // You can change the file extension
+            $thumbnailPath = 'thumbnails/' . $thumbnailFilename;
+            $thumbnailDirectory = dirname($thumbnailPath);
+            
+            if (!is_dir($thumbnailDirectory)) {
+                mkdir($thumbnailDirectory, 0755, true);
+            }
+            
+            file_put_contents($thumbnailPath, $thumbnailData);
+            $thumbnailUrl = 'http://localhost:200/' . $thumbnailPath;
+            
+            // Bind the URL directly to the parameter
+            $value = $thumbnailUrl;
+
         } elseif ($field === 'author') {
             $value = filter_var($value, FILTER_SANITIZE_STRING);
         } elseif ($field === 'categories') {
@@ -389,7 +406,6 @@ $app->patch('/posts/edit/{id}', function (Request $request, Response $response, 
         return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
     }
 });
-
 
 
 
