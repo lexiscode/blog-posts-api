@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2023 at 04:51 AM
+-- Generation Time: Aug 11, 2023 at 05:56 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -64,11 +64,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `title`, `slug`, `content`, `thumbnail`, `author`, `posted_at`) VALUES
-(1, 'Why The Python Hate?', 'why-the-python-hate', 'God is great and mighty, the creator of the universe.', '{{thumbnailImage}}', 'Alexis Chinyere', '2023-08-09 01:40:02'),
-(2, 'Why The C Hate?', 'why-the-c-hate', 'God is great and mighty, the creator of the universe.', 'an image here', 'Alexis Chinyere', '2023-08-09 01:40:21'),
-(3, 'Update Post Title', 'update-post-title', 'This is the updated content of the post.', 'updated-image-url.jpg', 'Jane Doe', '2023-08-09 01:40:26'),
-(7, 'Updated Post Title', 'updated-post-title', 'This is the updated content of the post.', 'updated-image-url.jpg', 'Jane Doe', '2023-08-09 02:56:36'),
-(25, 'Why The JavaScript Hate?', 'why-the-python-hate', 'God is great and mighty, the creator of the universe.', 'http://localhost:200/thumbnails/64d43ac222861.png', 'Alexis Chinyere', '2023-08-10 02:17:54');
+(25, 'Why The JavaScript Hate??', 'why-the-javascript-hate', 'In vel sapien purus. Sed vestibulum lectus et lectus tristique tristique. Vivamus vel dui ac tortor aliquam tristique ut non turpis. Praesent varius auctor tortor id lacinia.', 'http://localhost:200/thumbnails/64d5a74581eaf.png', 'Alex Vincent', '2023-08-10 02:17:54'),
+(28, 'Why The PHP Hate?', 'why-the-php-hate', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo vel lorem nec fringilla. Nulla facilisi. Nullam tincidunt erat eget scelerisque. Nunc ac lectus sit amet arcu vestibulum sollicitudin nec at dui. Fusce convallis lorem nec ligula feugiat, ac hendrerit quam aliquam.', 'http://localhost:200/thumbnails/64d58d986146d.png', 'Anthia Chinyere', '2023-08-11 02:23:36');
 
 -- --------------------------------------------------------
 
@@ -86,12 +83,9 @@ CREATE TABLE `posts_categories` (
 --
 
 INSERT INTO `posts_categories` (`post_id`, `category_id`) VALUES
-(2, 2),
-(2, 3),
-(3, 1),
-(7, 1),
-(7, 2),
-(25, 3);
+(25, 2),
+(25, 4),
+(28, 3);
 
 --
 -- Indexes for dumped tables
@@ -130,7 +124,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constraints for dumped tables

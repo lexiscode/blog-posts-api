@@ -5,7 +5,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../config/db.php';
+require __DIR__ . '/../database/db.php';
 require __DIR__ . '/../functions/resourceExists.php';
 
 // Create a new Slim app instance
