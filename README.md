@@ -60,7 +60,7 @@ php -S localhost:200
 ```
 
 ### API Testing with Postman
-The API can be tested using Postman. Import the provided collection file `BlogPostsAPI.postman_collection.json` into Postman to access pre-configured requests for each endpoint.
+The API can be tested using Postman. You can view or fork my collection via this link https://elements.getpostman.com/redirect?entityId=29003381-116c0a6b-9dd8-4c13-afb7-2bfdfc4fdf67&entityType=collection 
 
 ### Creating a Post
 Use the following endpoint to create a new blog post:
@@ -167,17 +167,3 @@ Contributions are welcome! Please follow the CONTRIBUTING guidelines.
 
 
 
-<div class="postman-run-button"
-data-postman-action="collection/fork"
-data-postman-visibility="public"
-data-postman-var-1="29003381-116c0a6b-9dd8-4c13-afb7-2bfdfc4fdf67"
-data-postman-collection-url="entityId=29003381-116c0a6b-9dd8-4c13-afb7-2bfdfc4fdf67&entityType=collection&workspaceId=4b87ec18-f7fc-4379-8b0d-daa27f332fe3"></div>
-<script type="text/javascript">
-  (function (p,o,s,t,m,a,n) {
-    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
-    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
-      (n = o.createElement("script")),
-      (n.id = s+t), (n.async = 1), (n.src = m), n
-    ));
-  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
-</script>
