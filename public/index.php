@@ -13,7 +13,7 @@ $app = AppFactory::create();
 
 // Define a route for the root URL
 $app->get('/', function (Request $request, Response $response) {
-    $response->getBody()->write("Hello, World!");
+    $response->getBody()->write("Hello there, this is a blog post API project!");
     return $response;
 });
 
