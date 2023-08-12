@@ -35,6 +35,8 @@ $email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
 $password = filter_var($data['password'], FILTER_SANITIZE_STRING);
 
 
+/************************************************************************************************ */
+
 // Lets instantiate Validator and CustomResponse classes
 $validator = new Validator();
 $customResponse = new CustomResponse();
@@ -51,6 +53,8 @@ if($validator->failed())
     $responseMessage = $validator->errors;
     return $customResponse->is400Response($response,$responseMessage);
 }
+
+/*********************************************************************************************** */
 
 
 // Retrieve user data from the database
@@ -137,6 +141,7 @@ $password = filter_var($data['password'], FILTER_SANITIZE_STRING);
 $password = password_hash($password, PASSWORD_DEFAULT);
 
 
+/******************************************************************************************************* */
 // Lets instantiate the Validator and CustomResponse classes
 $validator = new Validator();
 $customResponse = new CustomResponse();
@@ -154,10 +159,33 @@ if($validator->failed())
     return $customResponse->is400Response($response,$responseMessage);
 }
 
-// It checks if the provided email already exists in the database. 
+// Check if the provided email already exists in the database. 
+if ($email){
 
+    $db = new Db();
+    $conn = $db->connect();
 
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
 
+    $count = $stmt->fetchColumn();
+
+    if ($count > 0) {
+        // prepare the response data
+        $responseData = array(
+            "success" => false,
+            "message" => "Email already registered"
+        );
+
+        $response->getBody()->write(json_encode($responseData));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
+
+        $db = null;
+        die();
+    } 
+}
+/************************************************************************************************** */
 
 
 // Insert user data into the database
