@@ -12,6 +12,7 @@ As part of the project requirements, the following functionalities have been imp
 - **Slug-based Retrieval**: The API also supports retrieving posts by their unique slugs, ensuring accurate content delivery.
 - **Category Association**: Multiple categories can be added to a single post, catering to the scenario where one post may belong to multiple categories.
 - **JWT Authentication**: Users are required to register and log in to generate JWT tokens, ensuring secure access to protected routes.
+- **Registration and Login Validations**: Input data for registration and login is validated to ensure data integrity and security.
 - **API Documentation**: Comprehensive API documentation has been generated using Swagger, providing insights into available endpoints and their usage.
 
 This backend API has been meticulously designed to fulfill these requirements and serve as a reliable foundation for the blog's frontend development. By adhering to REST principles, the API ensures seamless communication and data exchange between the frontend and backend components.
