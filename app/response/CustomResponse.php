@@ -2,6 +2,7 @@
 
 namespace  App\Response;
 
+use Psr\Http\Message\ResponseInterface as Response;
 
 /**
  * This PHP code defines a custom response class named CustomResponse, which provides methods for 
@@ -17,6 +18,18 @@ class CustomResponse
         $responseMessage = json_encode(["success"=>false,"response"=>$responseMessage]);
         $response->getBody()->write($responseMessage);
         return $response->withHeader("Content-Type","application/json")->withStatus(400);
+    }
+
+    public static function respondWithError(Response $response, $data, $statusCode): Response
+    {
+        $response->getBody()->write(json_encode($data));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus($statusCode);
+    }
+
+    public static function respondWithData(Response $response, $data, $statusCode): Response
+    {
+        $response->getBody()->write(json_encode($data));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus($statusCode);
     }
 
 }

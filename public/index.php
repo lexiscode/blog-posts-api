@@ -7,10 +7,16 @@ use Slim\Factory\AppFactory;
 use Tuupola\Middleware\JwtAuthentication;
 use Firebase\JWT\JWT;
 
+use Dotenv\Dotenv;
+
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../database/db.php';
 require __DIR__ . '/../functions/resourceExists.php';
+
+// DotENV configuration
+$dotenv = Dotenv::createImmutable(__DIR__ . "/..");
+$dotenv->safeLoad();
 
 // Load the configuration settings from settings.php
 $settings = require __DIR__ . '/../config/settings.php';
@@ -35,9 +41,9 @@ require __DIR__ . '/../routes/posts.php';
 require __DIR__ . '/../routes/categories.php';
 
 
-// JWT Authentication Middleware
+/* JWT Authentication Middleware
 require __DIR__ . '/../middleware/jwt_proxy.php';
-
+*/
 
 // Run the Slim App
 $app->run();
