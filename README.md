@@ -64,6 +64,22 @@ php -S localhost:200
 ### API Testing with Postman
 The API can be tested using Postman. You can view or fork my collection via this link https://elements.getpostman.com/redirect?entityId=29003381-116c0a6b-9dd8-4c13-afb7-2bfdfc4fdf67&entityType=collection 
 
+### Create an Account and Login
+Use the following endpoint to create a user account and also login in order to generate an authorization "Bearer Token":
+```
+POST /register
+POST /login
+```
+
+Sample JSON request body:
+```json
+{
+  "email": "email@example.com",
+  "password": "password",
+}
+
+```
+
 ### Creating a Post
 Use the following endpoint to create a new blog post:
 ```
