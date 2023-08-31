@@ -48,7 +48,7 @@ class BlogCategoryController
      */
     public function getCategoryById(Request $request, Response $response, array $args): Response
     {
-        $id = $args['id'];
+        $id = htmlspecialchars($args['id']);
 
         $single_data = $this->blog_category->getById($id); 
 
@@ -82,8 +82,8 @@ class BlogCategoryController
         }
 
         // Get the values from the decoded JSON data and sanitize
-        $name = filter_var($data['name'], FILTER_SANITIZE_STRING);
-        $description = filter_var($data['description'], FILTER_SANITIZE_STRING);
+        $name = htmlspecialchars($data['name']);
+        $description = htmlspecialchars($data['description']);
 
         // Lets instantiate Validator and CustomResponse classes
         $validator = new Validator();
@@ -175,8 +175,7 @@ class BlogCategoryController
     public function putCategory(Request $request, Response $response, array $args): Response
     {
         // Get the id from the URL parameters
-        //$id = htmlspecialchars($args['id']);
-        $id = $request->getAttribute('id');
+        $id = htmlspecialchars($args['id']);
 
         // Get the JSON content from the request body
         $jsonBody = $request->getBody();
@@ -189,8 +188,8 @@ class BlogCategoryController
         }
 
         // Get the values from the decoded JSON data and sanitize
-        $name = filter_var($data['name'], FILTER_SANITIZE_STRING);
-        $description = filter_var($data['description'], FILTER_SANITIZE_STRING);
+        $name = htmlspecialchars($data['name']);
+        $description = htmlspecialchars($data['description']);
 
         // Lets instantiate Validator and CustomResponse classes
         $validator = new Validator();

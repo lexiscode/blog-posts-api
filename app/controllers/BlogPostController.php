@@ -51,7 +51,7 @@ class BlogPostController
     {
         // Get the id from the URL parameters
         // This format is used if we choose not to include "array $args" as part of our argument above
-        $id = $request->getAttribute('id');
+        $id = htmlspecialchars($request->getAttribute('id'));
         // $id = htmlspecialchars($args['id']);
 
         $single_data = $this->blog_post->getById($id); 
@@ -116,11 +116,11 @@ class BlogPostController
         }
         
         // Get the values from the decoded JSON data and sanitize
-        $title = filter_var($data['title'], FILTER_SANITIZE_STRING);
+        $title = htmlspecialchars($data['title']);
         $slug = htmlspecialchars($data['slug']);
-        $content = filter_var($data['content'], FILTER_SANITIZE_STRING);
+        $content = htmlspecialchars($data['content']);
         $thumbnailBase64 = htmlspecialchars($data['thumbnail']);
-        $author = filter_var($data['author'], FILTER_SANITIZE_STRING);
+        $author = htmlspecialchars($data['author']);
         // Extract categories from JSON data and sanitize too
         $categories = $data['categories'];
 

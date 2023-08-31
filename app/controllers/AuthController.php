@@ -38,8 +38,8 @@ class AuthController
         }
 
         // $data = $request->getParsedBody();
-        $email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
-        $password = filter_var($data['password'], FILTER_SANITIZE_STRING);
+        $email = htmlspecialchars($data['email']);
+        $password = htmlspecialchars($data['password']);
 
         // Lets instantiate Validator and CustomResponse classes
         $validator = new Validator();
@@ -104,8 +104,8 @@ class AuthController
         }
 
         // $data = $request->getParsedBody();
-        $email = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
-        $password = filter_var($data['password'], FILTER_SANITIZE_STRING);
+        $email = htmlspecialchars($data['email']);
+        $password = htmlspecialchars($data['password']);
         $password = password_hash($password, PASSWORD_DEFAULT);
 
         // Lets instantiate the Validator and CustomResponse classes
