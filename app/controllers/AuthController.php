@@ -10,8 +10,6 @@ use App\Models\ResourceExists;
 
 use Respect\Validation\Validator as v;
 use App\Validation\Validator;
-use App\Requests\CustomRequestHandler;
-
 
 
 class AuthController

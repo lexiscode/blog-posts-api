@@ -8,6 +8,9 @@ use App\Models\BlogPost;
 use App\Response\CustomResponse;
 use App\Models\ResourceExists;
 
+use Respect\Validation\Validator as v;
+use App\Validation\Validator;
+
 
 class BlogPostController
 {
@@ -139,10 +142,30 @@ class BlogPostController
         // Prepare the thumbnail URL
         $thumbnailUrl = 'http://localhost:200/' . $thumbnailPath;
 
+
+        // Lets instantiate Validator and CustomResponse classes
+        $validator = new Validator();
+        $customResponse = new CustomResponse();
+
+        // It starts by validating the input data using the $validator.
+        $validator->validate($request,[
+            "title"=>v::notEmpty(),
+            "slug"=>v::notEmpty(),
+            "content"=>v::notEmpty(),
+            "author"=>v::notEmpty(),
+            "categories"=>v::notEmpty()
+        ]);
+
+        // If validation fails, the method returns a 400 error response .
+        if($validator->failed())
+        {
+            $responseMessage = $validator->errors;
+            return $customResponse->is400Response($response,$responseMessage);
+        }
+
+
         // Call the model's addData() method to create the post
-        $isPostAdded = $this->blog_post->addData(
-            $title, $slug, $content, $thumbnailUrl, $author, $categories
-        );
+        $isPostAdded = $this->blog_post->addData($title, $slug, $content, $thumbnailUrl, $author, $categories);
 
         if ($isPostAdded) {
             // Prepare the response data

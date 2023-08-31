@@ -8,6 +8,9 @@ use App\Models\BlogCategory;
 use App\Response\CustomResponse;
 use App\Models\ResourceExists;
 
+use Respect\Validation\Validator as v;
+use App\Validation\Validator;
+
 
 class BlogCategoryController
 {
@@ -81,6 +84,23 @@ class BlogCategoryController
         // Get the values from the decoded JSON data and sanitize
         $name = filter_var($data['name'], FILTER_SANITIZE_STRING);
         $description = filter_var($data['description'], FILTER_SANITIZE_STRING);
+
+        // Lets instantiate Validator and CustomResponse classes
+        $validator = new Validator();
+        $customResponse = new CustomResponse();
+
+        // It starts by validating the input data using the $validator.
+        $validator->validate($request,[
+            "name"=>v::notEmpty(),
+            "description"=>v::notEmpty()
+        ]);
+
+        // If validation fails, the method returns a 400 error response .
+        if($validator->failed())
+        {
+            $responseMessage = $validator->errors;
+            return $customResponse->is400Response($response,$responseMessage);
+        }
 
         // Call the model's addData() method to create the post
         $isCategoryAdded = $this->blog_category->addData($name, $description);
@@ -171,6 +191,23 @@ class BlogCategoryController
         // Get the values from the decoded JSON data and sanitize
         $name = filter_var($data['name'], FILTER_SANITIZE_STRING);
         $description = filter_var($data['description'], FILTER_SANITIZE_STRING);
+
+        // Lets instantiate Validator and CustomResponse classes
+        $validator = new Validator();
+        $customResponse = new CustomResponse();
+
+        // It starts by validating the input data using the $validator.
+        $validator->validate($request,[
+            "name"=>v::notEmpty(),
+            "description"=>v::notEmpty()
+        ]);
+
+        // If validation fails, the method returns a 400 error response .
+        if($validator->failed())
+        {
+            $responseMessage = $validator->errors;
+            return $customResponse->is400Response($response,$responseMessage);
+        }
        
         // Check if the resource ID exists for posts
         if (!$this->resource_exists->resourceExistsCat($id)) {
