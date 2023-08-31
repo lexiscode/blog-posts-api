@@ -1,9 +1,5 @@
 <?php
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Factory\AppFactory;
-
 use App\Controllers\BlogCategoryController;
 use App\Models\BlogCategory;
 use App\Models\ResourceExists;
