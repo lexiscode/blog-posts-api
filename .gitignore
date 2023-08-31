@@ -1,5 +1,5 @@
 # Ignore .env file
 .env
 
-# Ignore the vendor directory
+# Ignore the vendor directory 
 vendor/
