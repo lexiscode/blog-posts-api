@@ -15,7 +15,6 @@ class BlogCategoryController
     protected $blog_category;
     protected $resource_exists;
 
-
     public function __construct(BlogCategory $blog_category, ResourceExists $resource_exists)
     {
         $this->blog_category = $blog_category;
@@ -188,7 +187,7 @@ class BlogCategoryController
         // Prepare the response data
         $responseData = array(
             "success" => $isDataUpdated,
-            "message" => $isDataUpdated ? "Data updated successfully." : "Failed to update data."
+            "message" => $isDataUpdated ? "Data updated successfully." : "Failed to update category."
         );
 
         return CustomResponse::respondWithData($response, $responseData, $isDataUpdated ? 200 : 500);

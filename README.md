@@ -121,7 +121,7 @@ Sample JSON pretty-read output:
 
 - Retrieve a post by slug:
   ```
-  GET /posts/{slug}
+  GET /posts/slug/{slug}
   ```
 
 ### Updating a Post

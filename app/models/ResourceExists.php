@@ -37,7 +37,7 @@ class ResourceExists
 
 
     // Function to check if a resource with a given ID exists
-    function resourceExistsCat($id) {
+    public function resourceExistsCat($id) {
         $sql = "SELECT COUNT(*) FROM categories WHERE id = :id";
 
         try {
@@ -52,6 +52,26 @@ class ResourceExists
             // Return false to indicate resource does not exist
             return false;
         }
+    }
+
+    // Check if the provided email already exists in the database. 
+    public function resourceExistsUserEmail($email) {
+
+        $sql = "SELECT COUNT(*) FROM users WHERE email = :email";
+
+        try{
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $rowCount = $stmt->fetchColumn();
+            return $rowCount > 0;
+
+        } catch (PDOException $e) {
+            // Return false to indicate resource does not exist
+            return false;
+        }
+        
     }
 
 }

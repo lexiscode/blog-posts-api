@@ -10,13 +10,13 @@ use App\Models\Database\DbConnect;
  $db = (new DbConnect())->getConn();
 
  // Inject the PDO instance into the BlogPost model
- $blogPostModel = new BlogCategory($db);
+ $blogCategoryModel = new BlogCategory($db);
  
  // Inject the PDO instance into the ResourceExists model
  $resourceExistsModel = new ResourceExists($db);
  
  // Inject the BlogPost model into the controller
- $blogCategoryController = new BlogCategoryController($blogPostModel, $resourceExistsModel);
+ $blogCategoryController = new BlogCategoryController($blogCategoryModel, $resourceExistsModel);
  
 
 /**

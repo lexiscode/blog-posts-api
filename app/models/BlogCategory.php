@@ -178,15 +178,6 @@ class BlogCategory
 
             // $db = null;
 
-            if (empty($isDataUpdated)) {
-                // Handle the case of no matching post
-                $errorResponse = array(
-                    "success" => $isDataUpdated,
-                    "resource-id" => 'Failed to update category.'
-                );
-                return $errorResponse; 
-            }
-
             return $isDataUpdated;
 
         } catch (PDOException $e) {

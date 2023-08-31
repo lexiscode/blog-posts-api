@@ -25,7 +25,7 @@ $app = AppFactory::create();
 
 
 // Include User Authentication Routes
-require __DIR__ . '/../routes/user_auth.php';
+require __DIR__ . '/../routes/authenticate.php';
 
 
 // Define a route for the root URL
@@ -40,9 +40,9 @@ require __DIR__ . '/../routes/posts.php';
 require __DIR__ . '/../routes/categories.php';
 
 
-/* JWT Authentication Middleware
+/* JWT Authentication Middleware */
 require __DIR__ . '/../middleware/jwt_proxy.php';
-*/
+
 
 // Run the Slim App
 $app->run();

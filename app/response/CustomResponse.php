@@ -5,9 +5,11 @@ namespace  App\Response;
 use Psr\Http\Message\ResponseInterface as Response;
 
 /**
- * This PHP code defines a custom response class named CustomResponse, which provides methods for 
- * formatting and returning different types of API responses with specific HTTP status codes. This class
- * is responsible for creating JSON responses with consistent structures for success and error cases.
+ * 
+ * Notice the first method code style is different from the two methods after, first one is static while
+ * the others are dynamic/flexible depending on error codes assigned.
+ * 
+ * All of these methods are made this way for personal future reference
  */
 class CustomResponse
 {
@@ -20,6 +22,7 @@ class CustomResponse
         return $response->withHeader("Content-Type","application/json")->withStatus(400);
     }
 
+    
     public static function respondWithError(Response $response, $data, $statusCode): Response
     {
         $response->getBody()->write(json_encode($data));
