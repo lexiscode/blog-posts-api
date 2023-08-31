@@ -11,8 +11,7 @@ use Dotenv\Dotenv;
 
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../database/db.php';
-require __DIR__ . '/../functions/resourceExists.php';
+
 
 // DotENV configuration
 $dotenv = Dotenv::createImmutable(__DIR__ . "/..");

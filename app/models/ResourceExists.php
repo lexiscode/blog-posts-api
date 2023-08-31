@@ -34,5 +34,25 @@ class ResourceExists
             return false;
         }
     }
+
+
+    // Function to check if a resource with a given ID exists
+    function resourceExistsCat($id) {
+        $sql = "SELECT COUNT(*) FROM categories WHERE id = :id";
+
+        try {
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $rowCount = $stmt->fetchColumn();
+            return $rowCount > 0;
+        } catch (PDOException $e) {
+            // Return false to indicate resource does not exist
+            return false;
+        }
+    }
+
 }
 

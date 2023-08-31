@@ -1,79 +1,218 @@
 <?php
 
 namespace App\Models;	
+
 use PDO;
+use PDOException;
 
-use App\Models\Database\DbConnect;
 
-class BankBalance extends DbConnect
+class BlogCategory
 {
+    protected $db;
 
-    public $id;
-    public $balance;
-
+    public function __construct(PDO $db)
+    {
+        $this->db = $db;
+    }
 
     /**
-     * Get all the bank details from the database
-     * @param object $conn Connection to the database
-     * @return array An associative array of all the article records
+     * Gets all categories from the database
      */
-
     public function getAll()
     {
+        $sql = "SELECT * FROM categories";
 
-        // READING FROM THE DATABASE AND CHECKING FOR ERRORS
-        $sql = "SELECT * 
-                FROM bank_accounts
-                ORDER BY id ASC;";
+        try{
+            $stmt = $this->db->query($sql);
+            $categories = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-        // Execute the sql statement, returning a result set as a PDOStatement object
-        $results = $this->getConn()->query($sql); 
+            // $this->db = null;
+            return $categories;
 
-        $data = $results->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return ['error' => $e->getMessage()];
+        }
 
-        return $data;
+        
     }
 
 
-    public function getDataById(){
+    /**
+     * Gets specific post by id from the database
+     */
+    public function getById($id)
+    {
+        $sql = "SELECT * 
+                FROM categories 
+                WHERE id = :id";
+
+        try{
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            //$db = null;
+            if (empty($result)) {
+                // Handle the case of no matching post
+                $errorResponse = array(
+                    "error-message" => "Resource not found with this ID.",
+                    "resource-id" => $id
+                );
+                return $errorResponse; // Return the error response directly
+            }
+
+            return $result;
        
-        $sql = "SELECT * FROM bank_accounts WHERE id = :id"; 
+        }catch (PDOException $e){
+            return ['error' => $e->getMessage()];
+        }
+    }
 
-        $stmt = $this->getConn()->prepare($sql);
 
-        $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+    /**
+     * Create a new category to the database
+     */
+    public function addData($name, $description)
+    {
+        $sql = "INSERT INTO categories (name, description) 
+                VALUES (:name, :description)";
 
-        // Set the default fetch mode for this statement
-        $stmt->setFetchMode(PDO::FETCH_CLASS, 'BankBalance');
+        try {
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
 
-        $result = $stmt->execute();
+            $isDataInserted = $stmt->execute();
 
-        if ($result === true) {
-            // Fetches the next row from a result set in an object format
-            return $stmt->fetch();
+            //$db = null;
+            if (empty($isDataInserted)) {
+                // Handle the case of no matching post
+                $errorResponse = array(
+                    "success" => $isDataInserted,
+                    "resource-id" => 'Failed to insert new category.'
+                );
+                return $errorResponse; // Return the error response directly
+            }
+
+            return $isDataInserted;
+
+        } catch (PDOException $e) {
+            return ['error' => $e->getMessage()];
         }
     }
 
 
 
-    public function transferMoney()
+    public function patchData($id, $data)
     {
+        $sql = "UPDATE categories SET ";
+        $params = array();
 
-        // update the data into the database server
-        $sql = "UPDATE bank_accounts 
-                SET balance = :balance, 
-                WHERE id = :id";
+        // Build the SET clause and parameter bindings for the update
+        foreach ($data as $field => $value) {
+            if ($field === 'name') {
+                $value = filter_var($value, FILTER_SANITIZE_STRING);
+            } elseif ($field === 'description') {
+                $value = htmlspecialchars($value);
+            } 
 
-        // Prepares the statement for execution
-        $stmt = $this->getConn()->prepare($sql);
+            $sql .= "$field = :$field, ";
+            $params[$field] = $value;
+        }
 
-        $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $stmt->bindValue(':balance', $this->balance, PDO::PARAM_STR);
+        // Remove the trailing comma and space
+        $sql = rtrim($sql, ", ");
 
-        // Executes a PDO prepared statement
-        $result = $stmt->execute();
+        // Add the WHERE condition
+        $sql .= " WHERE id = :id";
 
-        return $result;
- 
+        try {
+    
+            $stmt = $this->db->prepare($sql);
+
+            // Bind parameter values dynamically, depending of the available fields to be edited
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            foreach ($params as $field => &$value) {
+                $stmt->bindParam(":$field", $value);
+            }
+
+            $isDataUpdated = $stmt->execute();
+
+            // $db = null;
+
+            if (empty($isDataUpdated)) {
+                // Handle the case of no matching post
+                $errorResponse = array(
+                    "success" => $isDataUpdated,
+                    "resource-id" => 'Failed to update category.'
+                );
+                return $errorResponse; 
+            }
+
+            return $isDataUpdated;
+       
+        } catch (PDOException $e) {
+
+            return ['error' => $e->getMessage()];
+        }
     }
+
+    public function putData($id, $name, $description)
+    {
+        $sql = "UPDATE categories 
+            SET name = :name, 
+                description = :description
+            WHERE id = :id";
+
+        try {
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+
+            $isDataUpdated = $stmt->execute();
+
+            // $db = null;
+
+            if (empty($isDataUpdated)) {
+                // Handle the case of no matching post
+                $errorResponse = array(
+                    "success" => $isDataUpdated,
+                    "resource-id" => 'Failed to update category.'
+                );
+                return $errorResponse; 
+            }
+
+            return $isDataUpdated;
+
+        } catch (PDOException $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+
+    public function deleteData($id)
+    {
+        $sql = "DELETE FROM categories WHERE id= :id";
+
+        try {
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $isDataDeleted = $stmt->execute();
+
+            // $db = null;
+
+            return $isDataDeleted;
+                
+        } catch (PDOException $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
 }
+
+

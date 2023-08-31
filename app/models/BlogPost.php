@@ -9,7 +9,6 @@ use PDOException;
 class BlogPost
 {
     protected $db;
-    public $identifier;
 
 
     public function __construct(PDO $db)
@@ -116,8 +115,8 @@ class BlogPost
             } else {
                 // Handle the case of no matching post
                 $errorResponse = array(
-                    "error-message" => "Resource not found with this ID or slug.",
-                    "resource-identifier" => $this->identifier
+                    "error-message" => "Resource not found with this ID.",
+                    "resource-id" => $id
                 );
                 return $errorResponse; // Return the error response directly
             }
@@ -149,6 +148,15 @@ class BlogPost
             $stmt->execute();
 
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($result)) {
+                // Handle the case of no matching post
+                $errorResponse = array(
+                    "error-message" => "Resource not found with this slug.",
+                    "resource-slug" => $slug
+                );
+                return $errorResponse; // Return the error response directly
+            }
 
             $post = array(
                 "id" => $result[0]["id"],

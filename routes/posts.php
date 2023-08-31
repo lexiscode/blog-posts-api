@@ -35,29 +35,16 @@ $app->get('/posts/{id}', [$blogPostController, 'getPostById']);
 
 
 /**
- * Create post from the api to the database
+ * Get a specific post from the database by their slug
  */
-$app->post('/posts/create', [$blogPostController, 'createPost']);
+$app->get('/posts/slug/{slug}', [$blogPostController, 'getBySlug']);
+
 
 
 /**
- * Handling error message in a case whereby the user mistakenly set method as PUT, 
- * rather than using PATCH as the method.
+ * Create post from the api to the database
  */
-$app->put('/posts/edit/{id}', function (Request $request, Response $response, array $args) {
-    $id = htmlspecialchars($args['id']);
-
-    // Check if the resource exists for posts
-    if (!resourceExistsPost($id) || resourceExistsPost($id)) {
-        $errorResponse = array(
-            "error-message" => "Method not allowed. Must be one of: PATCH.",
-            "resource-method" => "PUT"
-        );
-        $response->getBody()->write(json_encode($errorResponse));
-        return $response->withHeader('Content-Type', 'application/json')->withStatus(404);
-    }
-
-});
+$app->post('/posts/create', [$blogPostController, 'createPost']);
 
 
 /**
@@ -73,7 +60,3 @@ $app->delete('/posts/delete/{id}', [$blogPostController, 'deletePost']);
 
 
 
-/**
- * Get a specific post from the database by their slug
- */
-$app->get('/posts/slug/{slug}', [$blogPostController, 'getBySlug']);

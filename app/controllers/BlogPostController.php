@@ -49,7 +49,7 @@ class BlogPostController
         // Get the id from the URL parameters
         // This format is used if we choose not to include "array $args" as part of our argument above
         $id = $request->getAttribute('id');
-        // $identifier = htmlspecialchars($args['id']);
+        // $id = htmlspecialchars($args['id']);
 
         $single_data = $this->blog_post->getById($id); 
 
