@@ -48,7 +48,7 @@ require __DIR__ . '/../routes/categories.php';
 
 
 /* JWT Authentication Middleware */
-//require __DIR__ . '/../middleware/jwt_proxy.php';
+require __DIR__ . '/../middleware/jwt_proxy.php';
 
 
 // Run the Slim App
