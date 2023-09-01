@@ -11,6 +11,7 @@ use App\Models\ResourceExists;
 use Respect\Validation\Validator as v;
 use App\Validation\Validator;
 
+use OpenApi\Annotations as OA;
 
 class BlogPostController
 {
@@ -26,7 +27,19 @@ class BlogPostController
     }
 
     /**
-     * Get all blog posts
+     * @OA\Get(
+     *     path="/posts",
+     *     summary="Get all blog posts",
+     *     tags={"Posts"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response containing all blog posts",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function getAllPosts(Request $request, Response $response): Response
     {
@@ -44,8 +57,27 @@ class BlogPostController
     }
 
 
-    /**
-     * Get a blog post by its id
+     /**
+     * @OA\Get(
+     *     path="/posts/{id}",
+     *     summary="Get a blog post by its ID",
+     *     tags={"Posts"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the blog post",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response containing the blog post",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function getPostById(Request $request, Response $response): Response
     {
@@ -68,7 +100,30 @@ class BlogPostController
 
 
     /**
-     * Search or Get a post by slug 
+     * @OA\Get(
+     *     path="/posts/slug/{slug}",
+     *     summary="Search or get a blog post by slug",
+     *     tags={"Posts"},
+     *     @OA\Parameter(
+     *         name="slug",
+     *         in="path",
+     *         required=true,
+     *         description="Slug of the blog post",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response containing the blog post",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Resource not found",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function getBySlug(Request $request, Response $response, array $args): Response
     {
@@ -98,8 +153,27 @@ class BlogPostController
     }
 
 
-    /**
-     * Create a new blog post
+     /**
+     * @OA\Post(
+     *     path="/posts",
+     *     summary="Create a new blog post",
+     *     tags={"Posts"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(mediaType="application/json"),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response with post creation status",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request or invalid JSON data",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function createPost(Request $request, Response $response): Response
     {
@@ -188,8 +262,38 @@ class BlogPostController
     }
 
 
-    /**
-     * Update a specific blog post by its ID
+     /**
+     * @OA\Patch(
+     *     path="/posts/{id}",
+     *     summary="Update a specific blog post by its ID",
+     *     tags={"Posts"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the blog post",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(mediaType="application/json"),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response with update status",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request or invalid JSON data",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Resource not found",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function updatePost(Request $request, Response $response, array $args): Response
     {
@@ -230,8 +334,31 @@ class BlogPostController
     }
 
 
-    /**
-     * Update a specific blog post by its ID
+     /**
+     * @OA\Delete(
+     *     path="/posts/{id}",
+     *     summary="Delete a specific blog post by its ID",
+     *     tags={"Posts"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the blog post",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response with delete status",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Resource not found",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function deletePost(Request $request, Response $response, array $args): Response
     {

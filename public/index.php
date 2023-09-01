@@ -30,8 +30,15 @@ require __DIR__ . '/../routes/authenticate.php';
 
 // Define a route for the root URL
 $app->get('/', function (Request $request, Response $response) {
-    $response->getBody()->write("Hello there, this is a blog post API project!");
+    $response->getBody()->write("Hello there, this is my Blog Post API project!");
     return $response;
+});
+
+
+// Define a route for API documentation
+$app->get('/openapi', function (Request $request, Response $response) {
+    // Include the code to generate and return the OpenAPI documentation here
+    require '/openapi/index.php';
 });
 
 
@@ -41,7 +48,7 @@ require __DIR__ . '/../routes/categories.php';
 
 
 /* JWT Authentication Middleware */
-require __DIR__ . '/../middleware/jwt_proxy.php';
+//require __DIR__ . '/../middleware/jwt_proxy.php';
 
 
 // Run the Slim App

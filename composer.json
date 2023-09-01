@@ -5,7 +5,8 @@
         "illuminate/database": "^7.12",
         "slim/psr7": "^1.1",
         "tuupola/slim-jwt-auth": "^3.4",
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "zircote/swagger-php": "^4.7"
     },
     
     "autoload": {
