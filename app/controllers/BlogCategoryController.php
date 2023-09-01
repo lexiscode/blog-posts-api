@@ -11,12 +11,15 @@ use App\Models\ResourceExists;
 use Respect\Validation\Validator as v;
 use App\Validation\Validator;
 
+use OpenApi\Annotations as OA;
+
 
 class BlogCategoryController
 {
 
     protected $blog_category;
     protected $resource_exists;
+
 
     public function __construct(BlogCategory $blog_category, ResourceExists $resource_exists)
     {
@@ -25,7 +28,19 @@ class BlogCategoryController
     }
 
     /**
-     * Get all blog posts
+     * @OA\Get(
+     *     path="/categories",
+     *     summary="Get all blog categories",
+     *     tags={"Categories"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response containing all blog categories",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function getAllCategories(Request $request, Response $response): Response
     {
@@ -43,8 +58,27 @@ class BlogCategoryController
     }
 
 
-    /**
-     * Get a blog post by its id
+     /**
+     * @OA\Get(
+     *     path="/categories/{id}",
+     *     summary="Get a blog category by its ID",
+     *     tags={"Categories"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the blog category",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response containing the blog category",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function getCategoryById(Request $request, Response $response, array $args): Response
     {
@@ -65,7 +99,26 @@ class BlogCategoryController
 
 
     /**
-     * Create a new blog category
+     * @OA\Post(
+     *     path="/categories",
+     *     summary="Create a new blog category",
+     *     tags={"Categories"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(mediaType="application/json"),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response with category creation status",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request or invalid JSON data",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function createCategory(Request $request, Response $response): Response
     {
@@ -129,7 +182,37 @@ class BlogCategoryController
 
 
     /**
-     * Update all or a part of a specific blog post by its ID
+     * @OA\Patch(
+     *     path="/categories/{id}",
+     *     summary="Update all or a part of a specific blog category by its ID",
+     *     tags={"Categories"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the blog category",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(mediaType="application/json"),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response with update status",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request or invalid JSON data",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Resource not found",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function patchCategory(Request $request, Response $response, array $args): Response
     {
@@ -169,8 +252,38 @@ class BlogCategoryController
     }
 
 
-    /**
-     * Update all data of a specific blog post by its ID
+     /**
+     * @OA\Put(
+     *     path="/categories/{id}",
+     *     summary="Update all data of a specific blog category by its ID",
+     *     tags={"Categories"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the blog category",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(mediaType="application/json"),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response with update status",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request or invalid JSON data",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Resource not found",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function putCategory(Request $request, Response $response, array $args): Response
     {
@@ -231,7 +344,30 @@ class BlogCategoryController
 
 
     /**
-     * Delete a specific blog post by its ID
+     * @OA\Delete(
+     *     path="/categories/{id}",
+     *     summary="Delete a specific blog category by its ID",
+     *     tags={"Categories"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the blog category",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response with delete status",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Resource not found",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
      */
     public function deleteCategory(Request $request, Response $response, array $args): Response
     {
