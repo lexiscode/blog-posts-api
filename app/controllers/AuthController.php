@@ -11,6 +11,8 @@ use App\Models\ResourceExists;
 use Respect\Validation\Validator as v;
 use App\Validation\Validator;
 
+use OpenApi\Annotations as OA;
+
 
 class AuthController
 {
@@ -25,6 +27,40 @@ class AuthController
     }
 
 
+    /**
+     * @OA\Post(
+     *     path="/auth/login",
+     *     summary="Authenticate a user by email and password",
+     *     tags={"Authentication"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(property="email", type="string", example="user@example.com"),
+     *                 @OA\Property(property="password", type="string", example="user_password"),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response with authentication status",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request or invalid JSON data",
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized due to invalid credentials",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
+     */
     public function authLogin(Request $request, Response $response): Response
     {
         // Get the JSON content from the request body
@@ -88,6 +124,37 @@ class AuthController
 
     }
 
+
+    /**
+     * @OA\Post(
+     *     path="/auth/register",
+     *     summary="Register a new user with email and password",
+     *     tags={"Authentication"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(property="email", type="string", example="new_user@example.com"),
+     *                 @OA\Property(property="password", type="string", example="new_user_password"),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response with user registration status",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request or invalid JSON data",
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *     )
+     * )
+     */
     public function authRegister(Request $request, Response $response): Response
     {
 

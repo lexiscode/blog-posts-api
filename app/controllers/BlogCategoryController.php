@@ -104,7 +104,15 @@ class BlogCategoryController
      *     summary="Create a new blog category",
      *     tags={"Categories"},
      *     @OA\RequestBody(
-     *         @OA\MediaType(mediaType="application/json"),
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(property="name", type="string", example="Category Name"),
+     *                 @OA\Property(property="description", type="string", example="Category Description"),
+     *             ),
+     *         ),
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -190,15 +198,23 @@ class BlogCategoryController
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of the blog category",
-     *         @OA\Schema(type="integer")
+     *         description="Category ID",
+     *         @OA\Schema(type="integer", format="int64")
      *     ),
      *     @OA\RequestBody(
-     *         @OA\MediaType(mediaType="application/json"),
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(property="name", type="string", example="Updated Category Name"),
+     *                 @OA\Property(property="description", type="string", example="Updated Category Description"),
+     *             ),
+     *         ),
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Successful response with update status",
+     *         description="Successful response with category update status",
      *     ),
      *     @OA\Response(
      *         response=400,
@@ -206,7 +222,7 @@ class BlogCategoryController
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Resource not found",
+     *         description="Category not found with this ID",
      *     ),
      *     @OA\Response(
      *         response=500,
@@ -252,7 +268,7 @@ class BlogCategoryController
     }
 
 
-     /**
+    /**
      * @OA\Put(
      *     path="/categories/{id}",
      *     summary="Update all data of a specific blog category by its ID",
@@ -261,15 +277,23 @@ class BlogCategoryController
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of the blog category",
-     *         @OA\Schema(type="integer")
+     *         description="Category ID",
+     *         @OA\Schema(type="integer", format="int64")
      *     ),
      *     @OA\RequestBody(
-     *         @OA\MediaType(mediaType="application/json"),
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(property="name", type="string", example="Updated Category Name"),
+     *                 @OA\Property(property="description", type="string", example="Updated Category Description"),
+     *             ),
+     *         ),
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Successful response with update status",
+     *         description="Successful response with category update status",
      *     ),
      *     @OA\Response(
      *         response=400,
@@ -277,7 +301,7 @@ class BlogCategoryController
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Resource not found",
+     *         description="Category not found with this ID",
      *     ),
      *     @OA\Response(
      *         response=500,

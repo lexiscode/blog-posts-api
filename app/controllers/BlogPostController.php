@@ -153,13 +153,25 @@ class BlogPostController
     }
 
 
-     /**
+    /**
      * @OA\Post(
      *     path="/posts",
      *     summary="Create a new blog post",
      *     tags={"Posts"},
      *     @OA\RequestBody(
-     *         @OA\MediaType(mediaType="application/json"),
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(property="title", type="string", example="New Blog Post"),
+     *                 @OA\Property(property="slug", type="string", example="new-blog-post"),
+     *                 @OA\Property(property="content", type="string", example="Content of the blog post..."),
+     *                 @OA\Property(property="thumbnail", type="string", format="base64", example="Base64-encoded image data..."),
+     *                 @OA\Property(property="author", type="string", example="Author Name"),
+     *                 @OA\Property(property="categories", type="array", @OA\Items(type="integer"), example="[1, 2]"),
+     *             ),
+     *         ),
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -262,8 +274,8 @@ class BlogPostController
     }
 
 
-     /**
-     * @OA\Patch(
+    /**
+     * @OA\Put(
      *     path="/posts/{id}",
      *     summary="Update a specific blog post by its ID",
      *     tags={"Posts"},
@@ -271,15 +283,27 @@ class BlogPostController
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of the blog post",
-     *         @OA\Schema(type="integer")
+     *         description="Post ID",
+     *         @OA\Schema(type="integer", format="int64")
      *     ),
      *     @OA\RequestBody(
-     *         @OA\MediaType(mediaType="application/json"),
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(property="title", type="string", example="Updated Blog Post"),
+     *                 @OA\Property(property="slug", type="string", example="updated-blog-post"),
+     *                 @OA\Property(property="content", type="string", example="Updated content of the blog post..."),
+     *                 @OA\Property(property="thumbnail", type="string", format="base64", example="Updated Base64-encoded image data..."),
+     *                 @OA\Property(property="author", type="string", example="Updated Author Name"),
+     *                 @OA\Property(property="categories", type="array", @OA\Items(type="integer"), example="[1, 2]"),
+     *             ),
+     *         ),
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Successful response with update status",
+     *         description="Successful response with post update status",
      *     ),
      *     @OA\Response(
      *         response=400,
@@ -287,7 +311,7 @@ class BlogPostController
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Resource not found",
+     *         description="Post not found with this ID",
      *     ),
      *     @OA\Response(
      *         response=500,
