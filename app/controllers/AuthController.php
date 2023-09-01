@@ -29,7 +29,7 @@ class AuthController
 
     /**
      * @OA\Post(
-     *     path="/auth/login",
+     *     path="/login",
      *     summary="Authenticate a user by email and password",
      *     tags={"Authentication"},
      *     @OA\RequestBody(
@@ -127,7 +127,7 @@ class AuthController
 
     /**
      * @OA\Post(
-     *     path="/auth/register",
+     *     path="/register",
      *     summary="Register a new user with email and password",
      *     tags={"Authentication"},
      *     @OA\RequestBody(
@@ -215,3 +215,4 @@ class AuthController
     }
 
 }
+
