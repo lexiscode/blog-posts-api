@@ -169,7 +169,8 @@ class BlogCategoryController
         if (isset($isCategoryAdded['error'])) {
 
             $errorResponse = array(
-                "error-message" => "An error occurred while processing your request.",
+                "status" => 500,
+                "message" => "An internal server error occurred while processing your request.",
                 "details" => $isCategoryAdded['error']
             );
             $response->getBody()->write(json_encode($errorResponse));
@@ -249,7 +250,8 @@ class BlogCategoryController
         // Check if the resource ID exists for posts
         if (!$this->resource_exists->resourceExistsCat($id)) {
             $errorResponse = array(
-                "error-message" => "Resource not found with this ID.",
+                "status" => 404,
+                "message" => "Resource not found with this ID.",
                 "resource-id" => $id
             );
             return CustomResponse::respondWithError($response, $errorResponse, 404);
@@ -348,7 +350,8 @@ class BlogCategoryController
         // Check if the resource ID exists for posts
         if (!$this->resource_exists->resourceExistsCat($id)) {
             $errorResponse = array(
-                "error-message" => "Resource not found with this ID.",
+                "status" => 404,
+                "message" => "Resource not found with this ID.",
                 "resource-id" => $id
             );
             return CustomResponse::respondWithError($response, $errorResponse, 404);
@@ -400,7 +403,8 @@ class BlogCategoryController
         // Check if the resource exists for posts using the model method
         if (!$this->resource_exists->resourceExistsCat($id)) {
             $errorResponse = array(
-                "error-message" => "Resource not found with this ID.",
+                "status" => 404,
+                "message" => "Resource not found with this ID.",
                 "resource-id" => $id
             );
             return CustomResponse::respondWithError($response, $errorResponse, 404);

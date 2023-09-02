@@ -108,7 +108,8 @@ class AuthController
         if (isset($isLoginValid['error'])) {
 
             $errorResponse = array(
-                "message" => "An error occurred while processing your request.",
+                "status" => 500,
+                "message" => "An internal server error occurred while processing your request.",
                 "details" => $isLoginValid['error'] // gets the error details
             );
             $response->getBody()->write(json_encode($errorResponse));

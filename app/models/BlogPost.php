@@ -115,7 +115,8 @@ class BlogPost
             } else {
                 // Handle the case of no matching post
                 $errorResponse = array(
-                    "error-message" => "Resource not found with this ID.",
+                    "status" => 404,
+                    "message" => "Resource not found with this ID.",
                     "resource-id" => $id
                 );
                 return $errorResponse; // Return the error response directly
@@ -152,8 +153,9 @@ class BlogPost
             if (empty($result)) {
                 // Handle the case of no matching post
                 $errorResponse = array(
-                    "error-message" => "Resource not found with this slug.",
-                    "resource-slug" => $slug
+                    "status" => 404,
+                    "message" => "Resource not found with this slug.",
+                    "resource-id" => $slug
                 );
                 return $errorResponse; // Return the error response directly
             }

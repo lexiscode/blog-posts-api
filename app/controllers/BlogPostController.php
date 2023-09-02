@@ -134,7 +134,8 @@ class BlogPostController
 
         if (isset($post['error'])) {
             $errorResponse = array(
-                "error-message" => "An error occurred while processing your request.",
+                "status" => 500,
+                "message" => "An internal server error occurred while processing your request.",
                 "details" => $post['error']
             );
             return CustomResponse::respondWithError($response, $errorResponse, 500);
@@ -142,7 +143,8 @@ class BlogPostController
 
         if (empty($post)) {
             $errorResponse = array(
-                "error-message" => "Resource not found with this slug.",
+                "status" => 404,
+                "message" => "Resource not found with this slug.",
                 "resource-slug" => $slug
             );
             return CustomResponse::respondWithError($response, $errorResponse, 404);
@@ -339,7 +341,8 @@ class BlogPostController
         // Check if the resource ID exists for posts
         if (!$this->resource_exists->resourceExistsPost($id)) {
             $errorResponse = array(
-                "error-message" => "Resource not found with this ID.",
+                "status" => 404,
+                "message" => "Resource not found with this ID.",
                 "resource-id" => $id
             );
             return CustomResponse::respondWithError($response, $errorResponse, 404);
@@ -391,7 +394,8 @@ class BlogPostController
         // Check if the resource exists for posts using the model method
         if (!$this->resource_exists->resourceExistsPost($id)) {
             $errorResponse = array(
-                "error-message" => "Resource not found with this ID.",
+                "status" => 404,
+                "message" => "Resource not found with this ID.",
                 "resource-id" => $id
             );
             return CustomResponse::respondWithError($response, $errorResponse, 404);

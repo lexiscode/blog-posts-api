@@ -57,7 +57,8 @@ class BlogCategory
             if (empty($result)) {
                 // Handle the case of no matching post
                 $errorResponse = array(
-                    "error-message" => "Resource not found with this ID.",
+                    "status" => 404,
+                    "message" => "Resource not found with this ID.",
                     "resource-id" => $id
                 );
                 return $errorResponse; // Return the error response directly
@@ -91,7 +92,7 @@ class BlogCategory
                 // Handle the case of no matching post
                 $errorResponse = array(
                     "success" => $isDataInserted,
-                    "resource-id" => 'Failed to insert new category.'
+                    "message" => 'Failed to insert new category.'
                 );
                 return $errorResponse; // Return the error response directly
             }
@@ -146,7 +147,7 @@ class BlogCategory
                 // Handle the case of no matching post
                 $errorResponse = array(
                     "success" => $isDataUpdated,
-                    "resource-id" => 'Failed to update category.'
+                    "message" => 'Failed to update category.'
                 );
                 return $errorResponse; 
             }
