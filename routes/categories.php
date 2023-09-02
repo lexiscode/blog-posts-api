@@ -28,7 +28,7 @@ $app->get('/categories', [$blogCategoryController, 'getAllCategories']);
 /**
  * Get all a specific category from the database
  */
-$app->get('/categories/{id}', [$blogCategoryController, 'getCategoryById']);
+$app->get('/categories/{id:\d+}', [$blogCategoryController, 'getCategoryById']);
 
 
 /**
@@ -40,15 +40,15 @@ $app->post('/categories/create', [$blogCategoryController, 'createCategory']);
 /**
  * Edit/Update a categories from the api to the database, using PUT
  */
-$app->put('/categories/edit/{id}', [$blogCategoryController, 'putCategory']);
+$app->put('/categories/edit/{id:\d+}', [$blogCategoryController, 'putCategory']);
 
 
 /**
  * Edit/Update a categories from the api to the database, using PATCH
  */
-$app->patch('/categories/edit/{id}', [$blogCategoryController, 'patchCategory']);
+$app->patch('/categories/edit/{id:\d+}', [$blogCategoryController, 'patchCategory']);
 
 
 // Delete a categories from the api to the database
-$app->delete('/categories/delete/{id}', [$blogCategoryController, 'deleteCategory']);
+$app->delete('/categories/delete/{id:\d+}', [$blogCategoryController, 'deleteCategory']);
 

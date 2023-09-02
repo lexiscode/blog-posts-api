@@ -91,7 +91,7 @@ class AuthController
         if($validator->failed())
         {
             $responseMessage = $validator->errors;
-            return $customResponse->is400Response($response,$responseMessage);
+            return $customResponse->is400Response($response, $responseMessage);
         }
 
         // Call the model's Auth() method

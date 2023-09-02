@@ -27,7 +27,7 @@ $app->get('/posts', [$blogPostController, 'getAllPosts']);
 /**
  * Get a specific post from the database by ID or slug
  */
-$app->get('/posts/{id}', [$blogPostController, 'getPostById']);
+$app->get('/posts/{id:\d+}', [$blogPostController, 'getPostById']);
 
 
 /**
@@ -46,13 +46,11 @@ $app->post('/posts/create', [$blogPostController, 'createPost']);
 /**
  * Edit/Update a post from the api to the database, using PATCH
  */
-$app->patch('/posts/edit/{id}', [$blogPostController, 'updatePost']);
+$app->patch('/posts/edit/{id:\d+}', [$blogPostController, 'updatePost']);
 
 
 /**
  * Delete a post from the api to the database
  */
-$app->delete('/posts/delete/{id}', [$blogPostController, 'deletePost']);
-
-
+$app->delete('/posts/delete/{id:\d+}', [$blogPostController, 'deletePost']);
 
