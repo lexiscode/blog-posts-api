@@ -5,6 +5,10 @@ namespace App\Models;
 use PDO;
 use PDOException;
 
+// necessary imports for the logging functionality
+use Psr\Container\ContainerInterface; 
+use Laminas\Log\Logger;
+
 use Firebase\JWT\JWT;
 
 class Auth
