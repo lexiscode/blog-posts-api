@@ -274,6 +274,29 @@ class BlogPost
                 $value = htmlspecialchars($value);
             } elseif ($field === 'thumbnail') {
                 // ... handle thumbnail update logic ...
+                if (!empty($value)) {
+                    // Decode Base64 image data
+                    $thumbnailData = base64_decode($value);
+                    // Generate a unique filename
+                    $thumbnailFilename = uniqid() . '.png'; // You can change the file extension
+                    // Define the path to store the images
+                    $thumbnailPath = 'thumbnails/' . $thumbnailFilename;
+    
+                    // Ensure the directory exists, create it if not
+                    $thumbnailDirectory = dirname($thumbnailPath);
+                    if (!is_dir($thumbnailDirectory)) {
+                        mkdir($thumbnailDirectory, 0755, true);
+                    }
+    
+                    // Save the decoded image data to the specified path
+                    file_put_contents($thumbnailPath, $thumbnailData);
+                    // Prepare the thumbnail URL
+                    $params['thumbnail'] = 'http://localhost:200/' . $thumbnailPath;
+                } else {
+                    // If $value is empty, it means no thumbnail update is required,
+                    // so we skip this field.
+                    continue;
+                }
             } elseif ($field === 'author') {
                 $value = htmlspecialchars($value);
             } elseif ($field === 'categories') {
@@ -309,6 +332,7 @@ class BlogPost
         }
     }
 
+    
 
     public function deleteData($id)
     {

@@ -51,5 +51,5 @@ $app->patch('/posts/edit/{id:\d+}', [$blogPostController, 'patchPost']);
 /**
  * Delete a post from the api to the database
  */
-$app->delete('/posts/delete/{id:\d+}', [$blogPostController, 'deletePost']);
+$app->delete('/posts/{id:\d+}', [$blogPostController, 'deletePost']);
 

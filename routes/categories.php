@@ -38,4 +38,4 @@ $app->put('/categories/edit/{id:\d+}', [$blogCategoryController, 'putCategory'])
 $app->patch('/categories/edit/{id:\d+}', [$blogCategoryController, 'patchCategory']);
 
 // Delete a categories from the api to the database
-$app->delete('/categories/delete/{id:\d+}', [$blogCategoryController, 'deleteCategory']);
+$app->delete('/categories/{id:\d+}', [$blogCategoryController, 'deleteCategory']);

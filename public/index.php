@@ -66,7 +66,7 @@ require __DIR__ . '/../routes/categories.php';
 
 
 /* JWT Authentication Middleware */
-//require __DIR__ . '/../middleware/jwt_proxy.php';
+require __DIR__ . '/../middleware/jwt_proxy.php';
 
 
 /* This below handles all 404 routes error response */

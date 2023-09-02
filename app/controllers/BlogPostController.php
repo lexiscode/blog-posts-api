@@ -171,7 +171,7 @@ class BlogPostController
 
     /**
      * @OA\Post(
-     *     path="/posts",
+     *     path="/posts/create",
      *     summary="Create a new blog post",
      *     tags={"Posts"},
      *     @OA\RequestBody(
@@ -278,7 +278,7 @@ class BlogPostController
             // Prepare the response data
             $responseData = array(
                 "success" => true,
-                "message" => "Post and categories inserted successfully.",
+                "message" => "Post has been inserted successfully.",
                 "thumbnail" => $thumbnailUrl
             );
 
@@ -296,8 +296,8 @@ class BlogPostController
 
 
     /**
-     * @OA\Put(
-     *     path="/posts/{id}",
+     * @OA\Patch(
+     *     path="/posts/edit/{id}",
      *     summary="Update a specific blog post by its ID",
      *     tags={"Posts"},
      *     @OA\Parameter(

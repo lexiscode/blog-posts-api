@@ -109,7 +109,7 @@ class BlogCategoryController
 
     /**
      * @OA\Post(
-     *     path="/categories",
+     *     path="/categories/create",
      *     summary="Create a new blog category",
      *     tags={"Categories"},
      *     @OA\RequestBody(
@@ -205,7 +205,7 @@ class BlogCategoryController
 
     /**
      * @OA\Patch(
-     *     path="/categories/{id}",
+     *     path="/categories/edit/{id}",
      *     summary="Update all or a part of a specific blog category by its ID",
      *     tags={"Categories"},
      *     @OA\Parameter(
@@ -289,7 +289,7 @@ class BlogCategoryController
 
     /**
      * @OA\Put(
-     *     path="/categories/{id}",
+     *     path="/categories/edit/{id}",
      *     summary="Update all data of a specific blog category by its ID",
      *     tags={"Categories"},
      *     @OA\Parameter(
