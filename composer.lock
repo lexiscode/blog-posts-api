@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49d7544fc6ac71e3d7ddea24d04ae135",
+    "content-hash": "142ceac821f764227817896b018bfa0f",
     "packages": [
+        {
+            "name": "container-interop/container-interop",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/container-interop/container-interop.git",
+                "reference": "79cbf1341c22ec75643d841642dd5d6acd83bdb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/container-interop/container-interop/zipball/79cbf1341c22ec75643d841642dd5d6acd83bdb8",
+                "reference": "79cbf1341c22ec75643d841642dd5d6acd83bdb8",
+                "shasum": ""
+            },
+            "require": {
+                "psr/container": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Interop\\Container\\": "src/Interop/Container/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
+            "homepage": "https://github.com/container-interop/container-interop",
+            "support": {
+                "issues": "https://github.com/container-interop/container-interop/issues",
+                "source": "https://github.com/container-interop/container-interop/tree/master"
+            },
+            "abandoned": "psr/container",
+            "time": "2017-02-14T19:40:03+00:00"
+        },
         {
             "name": "doctrine/annotations",
             "version": "2.0.1",
@@ -657,6 +693,404 @@
             "time": "2021-12-06T19:25:06+00:00"
         },
         {
+            "name": "laminas/laminas-hydrator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-hydrator.git",
+                "reference": "acab29a3327a70be0a653d88906655b15de15517"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-hydrator/zipball/acab29a3327a70be0a653d88906655b15de15517",
+                "reference": "acab29a3327a70be0a653d88906655b15de15517",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-stdlib": "^2.5.1",
+                "laminas/laminas-zendframework-bridge": "^1.0",
+                "php": ">=5.5"
+            },
+            "replace": {
+                "zendframework/zend-hydrator": "self.version"
+            },
+            "require-dev": {
+                "laminas/laminas-eventmanager": "^2.5.1",
+                "laminas/laminas-filter": "^2.5.1",
+                "laminas/laminas-inputfilter": "^2.5.1",
+                "laminas/laminas-serializer": "^2.5.1",
+                "laminas/laminas-servicemanager": "^2.5.1",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "^2.0@dev"
+            },
+            "suggest": {
+                "laminas/laminas-eventmanager": "^2.5.1, to support aggregate hydrator usage",
+                "laminas/laminas-filter": "^2.5.1, to support naming strategy hydrator usage",
+                "laminas/laminas-serializer": "^2.5.1, to use the SerializableStrategy",
+                "laminas/laminas-servicemanager": "^2.5.1, to support hydrator plugin manager usage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev",
+                    "dev-develop": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Hydrator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "hydrator",
+                "laminas"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-hydrator/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-hydrator/issues",
+                "rss": "https://github.com/laminas/laminas-hydrator/releases.atom",
+                "source": "https://github.com/laminas/laminas-hydrator"
+            },
+            "time": "2019-12-31T17:06:20+00:00"
+        },
+        {
+            "name": "laminas/laminas-log",
+            "version": "2.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-log.git",
+                "reference": "cf649ea4a9e893051c18b82ab3a871c6195b0157"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-log/zipball/cf649ea4a9e893051c18b82ab3a871c6195b0157",
+                "reference": "cf649ea4a9e893051c18b82ab3a871c6195b0157",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-servicemanager": "~2.5",
+                "laminas/laminas-stdlib": "~2.5",
+                "laminas/laminas-zendframework-bridge": "^1.0",
+                "php": ">=5.5"
+            },
+            "replace": {
+                "zendframework/zend-log": "self.version"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "1.7.*",
+                "laminas/laminas-console": "~2.5",
+                "laminas/laminas-db": "~2.5",
+                "laminas/laminas-escaper": "~2.5",
+                "laminas/laminas-filter": "~2.5",
+                "laminas/laminas-mail": "~2.5",
+                "laminas/laminas-mvc": "~2.5",
+                "laminas/laminas-validator": "~2.5",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-mongo": "mongodb extetension to use MongoDB writer",
+                "laminas/laminas-console": "Laminas\\Console component to use the RequestID log processor",
+                "laminas/laminas-db": "Laminas\\Db component to use the database log writer",
+                "laminas/laminas-escaper": "Laminas\\Escaper component, for use in the XML log formatter",
+                "laminas/laminas-mail": "Laminas\\Mail component to use the email log writer",
+                "laminas/laminas-validator": "Laminas\\Validator component to block invalid log messages"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev",
+                    "dev-develop": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Log\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "component for general purpose logging",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "log",
+                "logging"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-log/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-log/issues",
+                "rss": "https://github.com/laminas/laminas-log/releases.atom",
+                "source": "https://github.com/laminas/laminas-log"
+            },
+            "time": "2019-12-31T17:20:19+00:00"
+        },
+        {
+            "name": "laminas/laminas-servicemanager",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-servicemanager.git",
+                "reference": "953c9511cf75420cc8b6b31f5323aca53f4a89f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/953c9511cf75420cc8b6b31f5323aca53f4a89f3",
+                "reference": "953c9511cf75420cc8b6b31f5323aca53f4a89f3",
+                "shasum": ""
+            },
+            "require": {
+                "container-interop/container-interop": "~1.0",
+                "laminas/laminas-zendframework-bridge": "^1.0",
+                "php": ">=5.5"
+            },
+            "replace": {
+                "zendframework/zend-servicemanager": "self.version"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "1.7.*",
+                "laminas/laminas-di": "~2.5",
+                "laminas/laminas-mvc": "~2.5",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "laminas/laminas-di": "Laminas\\Di component",
+                "ocramius/proxy-manager": "ProxyManager 0.5.* to handle lazy initialization of services"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\ServiceManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "servicemanager"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-servicemanager/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-servicemanager/issues",
+                "rss": "https://github.com/laminas/laminas-servicemanager/releases.atom",
+                "source": "https://github.com/laminas/laminas-servicemanager"
+            },
+            "time": "2019-12-31T17:44:10+00:00"
+        },
+        {
+            "name": "laminas/laminas-stdlib",
+            "version": "2.7.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-stdlib.git",
+                "reference": "b69e2741673daabdf720bc76668448ceb1e4c537"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/b69e2741673daabdf720bc76668448ceb1e4c537",
+                "reference": "b69e2741673daabdf720bc76668448ceb1e4c537",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-hydrator": "~1.0",
+                "laminas/laminas-zendframework-bridge": "^1.0",
+                "php": ">=5.5"
+            },
+            "replace": {
+                "zendframework/zend-stdlib": "self.version"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1",
+                "fabpot/php-cs-fixer": "1.7.*",
+                "laminas/laminas-config": "~2.5",
+                "laminas/laminas-eventmanager": "~2.5",
+                "laminas/laminas-filter": "~2.5",
+                "laminas/laminas-inputfilter": "~2.5",
+                "laminas/laminas-serializer": "~2.5",
+                "laminas/laminas-servicemanager": "~2.5",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "laminas/laminas-eventmanager": "To support aggregate hydrator usage",
+                "laminas/laminas-filter": "To support naming strategy hydrator usage",
+                "laminas/laminas-serializer": "Laminas\\Serializer component",
+                "laminas/laminas-servicemanager": "To support hydrator plugin manager usage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev",
+                    "dev-develop": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\Stdlib\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "laminas",
+                "stdlib"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-stdlib/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-stdlib/issues",
+                "rss": "https://github.com/laminas/laminas-stdlib/releases.atom",
+                "source": "https://github.com/laminas/laminas-stdlib"
+            },
+            "time": "2019-12-31T17:51:00+00:00"
+        },
+        {
+            "name": "laminas/laminas-zendframework-bridge",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
+                "reference": "5ef52e26392777a26dbb8f20fe24f91b406459f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/5ef52e26392777a26dbb8f20fe24f91b406459f6",
+                "reference": "5ef52e26392777a26dbb8f20fe24f91b406459f6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~8.0.0 || ~8.1.0 || ~8.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5.26",
+                "psalm/plugin-phpunit": "^0.18.0",
+                "squizlabs/php_codesniffer": "^3.7.1",
+                "vimeo/psalm": "^4.29.0"
+            },
+            "type": "library",
+            "extra": {
+                "laminas": {
+                    "module": "Laminas\\ZendFrameworkBridge"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/autoload.php"
+                ],
+                "psr-4": {
+                    "Laminas\\ZendFrameworkBridge\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Alias legacy ZF class names to Laminas Project equivalents.",
+            "keywords": [
+                "ZendFramework",
+                "autoloading",
+                "laminas",
+                "zf"
+            ],
+            "support": {
+                "forum": "https://discourse.laminas.dev/",
+                "issues": "https://github.com/laminas/laminas-zendframework-bridge/issues",
+                "rss": "https://github.com/laminas/laminas-zendframework-bridge/releases.atom",
+                "source": "https://github.com/laminas/laminas-zendframework-bridge"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2022-12-12T11:44:10+00:00"
+        },
+        {
+            "name": "laravel/serializable-closure",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/serializable-closure.git",
+                "reference": "e5a3057a5591e1cfe8183034b0203921abe2c902"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/e5a3057a5591e1cfe8183034b0203921abe2c902",
+                "reference": "e5a3057a5591e1cfe8183034b0203921abe2c902",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "nesbot/carbon": "^2.61",
+                "pestphp/pest": "^1.21.3",
+                "phpstan/phpstan": "^1.8.2",
+                "symfony/var-dumper": "^5.4.11"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\SerializableClosure\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Nuno Maduro",
+                    "email": "nuno@laravel.com"
+                }
+            ],
+            "description": "Laravel Serializable Closure provides an easy and secure way to serialize closures in PHP.",
+            "keywords": [
+                "closure",
+                "laravel",
+                "serializable"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/serializable-closure/issues",
+                "source": "https://github.com/laravel/serializable-closure"
+            },
+            "time": "2023-07-14T13:56:28+00:00"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "2.69.0",
             "source": {
@@ -811,6 +1245,134 @@
                 "source": "https://github.com/nikic/FastRoute/tree/master"
             },
             "time": "2018-02-13T20:26:39+00:00"
+        },
+        {
+            "name": "php-di/invoker",
+            "version": "2.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-DI/Invoker.git",
+                "reference": "cd6d9f267d1a3474bdddf1be1da079f01b942786"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-DI/Invoker/zipball/cd6d9f267d1a3474bdddf1be1da079f01b942786",
+                "reference": "cd6d9f267d1a3474bdddf1be1da079f01b942786",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3",
+                "psr/container": "^1.0|^2.0"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1.8",
+                "mnapoli/hard-mode": "~0.3.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Invoker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generic and extensible callable invoker",
+            "homepage": "https://github.com/PHP-DI/Invoker",
+            "keywords": [
+                "callable",
+                "dependency",
+                "dependency-injection",
+                "injection",
+                "invoke",
+                "invoker"
+            ],
+            "support": {
+                "issues": "https://github.com/PHP-DI/Invoker/issues",
+                "source": "https://github.com/PHP-DI/Invoker/tree/2.3.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mnapoli",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-12-13T09:22:56+00:00"
+        },
+        {
+            "name": "php-di/php-di",
+            "version": "7.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-DI/PHP-DI.git",
+                "reference": "9ea40a5a6970bf1ca5cbe148bc16cbad6ca3db6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/9ea40a5a6970bf1ca5cbe148bc16cbad6ca3db6c",
+                "reference": "9ea40a5a6970bf1ca5cbe148bc16cbad6ca3db6c",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/serializable-closure": "^1.0",
+                "php": ">=8.0",
+                "php-di/invoker": "^2.0",
+                "psr/container": "^1.1 || ^2.0"
+            },
+            "provide": {
+                "psr/container-implementation": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3",
+                "friendsofphp/proxy-manager-lts": "^1",
+                "mnapoli/phpunit-easymock": "^1.3",
+                "phpunit/phpunit": "^9.5",
+                "vimeo/psalm": "^4.6"
+            },
+            "suggest": {
+                "friendsofphp/proxy-manager-lts": "Install it if you want to use lazy injection (version ^1)"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "DI\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "The dependency injection container for humans",
+            "homepage": "https://php-di.org/",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interop",
+                "dependency injection",
+                "di",
+                "ioc",
+                "psr11"
+            ],
+            "support": {
+                "issues": "https://github.com/PHP-DI/PHP-DI/issues",
+                "source": "https://github.com/PHP-DI/PHP-DI/tree/7.0.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mnapoli",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/php-di/php-di",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-08-10T14:57:56+00:00"
         },
         {
             "name": "phpoption/phpoption",

@@ -199,6 +199,7 @@ class AuthController
                 "success" => false,
                 "message" => "Email already registered"
             );
+
             return CustomResponse::respondWithError($response, $errorResponse, 400);
             die();
         }

@@ -5,15 +5,25 @@ namespace App\Models;
 use PDO;
 use PDOException;
 
+// necessary imports for the logging functionality
+use Psr\Container\ContainerInterface; 
+use Laminas\Log\Logger;
+
 
 class BlogPost
 {
     protected $db;
 
+    protected $container;
+    protected $logger;
 
-    public function __construct(PDO $db)
+
+    public function __construct(PDO $db, ContainerInterface $container)
     {
         $this->db = $db;
+
+        $this->container = $container;
+        $this->logger = $container->get(Logger::class);
     }
 
     /**
@@ -62,6 +72,7 @@ class BlogPost
             return array_values($posts);
         } catch (PDOException $e) {
             // Handle the exception here, log or throw as needed
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
     }
@@ -86,7 +97,6 @@ class BlogPost
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
           
-            $db = null;
 
             if (!empty($result)) {
 
@@ -126,6 +136,7 @@ class BlogPost
 
         } catch (PDOException $e) {
             // Handle the exception here, log or throw as needed
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
     }
@@ -183,8 +194,10 @@ class BlogPost
             }
 
             return $post;
+
         } catch (PDOException $e) {
             // Handle the exception here, log or throw as needed
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
     }
@@ -231,7 +244,6 @@ class BlogPost
             }
 
             $this->db->commit();
-            $db = null;
 
             return true; // Return true if the data was added successfully
 
@@ -239,6 +251,7 @@ class BlogPost
             $this->db->rollback();
 
             // Handle the exception here, log or throw as needed
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
     }
@@ -254,15 +267,15 @@ class BlogPost
         // Build the SET clause and parameter bindings for the update
         foreach ($data as $field => $value) {
             if ($field === 'title') {
-                $value = filter_var($value, FILTER_SANITIZE_STRING);
+                $value = htmlspecialchars($value);
             } elseif ($field === 'slug') {
                 $value = htmlspecialchars($value);
             } elseif ($field === 'content') {
-                $value = filter_var($value, FILTER_SANITIZE_STRING);
+                $value = htmlspecialchars($value);
             } elseif ($field === 'thumbnail') {
                 // ... handle thumbnail update logic ...
             } elseif ($field === 'author') {
-                $value = filter_var($value, FILTER_SANITIZE_STRING);
+                $value = htmlspecialchars($value);
             } elseif ($field === 'categories') {
                 // Skip categories field for now
                 continue;
@@ -291,6 +304,7 @@ class BlogPost
             return $stmt->execute();
         } catch (PDOException $e) {
             // Return false to indicate failure
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return false;
         }
     }
@@ -308,6 +322,7 @@ class BlogPost
             return $isDataDeleted;
         } catch (PDOException $e) {
             // Handle the exception here, log or throw as needed
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return false;
         }
     }

@@ -4,20 +4,25 @@ use App\Controllers\BlogPostController;
 use App\Models\BlogPost;
 use App\Models\ResourceExists;
 use App\Models\Database\DbConnect;
-// Function to check if a resource with a given ID exists is available globally in index.php
+
+use Psr\Container\ContainerInterface;
 
 
  // Create a PDO instance for database connection
 $db = (new DbConnect())->getConn();
 
+// Retrieve the ContainerInterface from the Slim app container
+$container = $app->getContainer();
+
 // Inject the PDO instance into the BlogPost model
-$blogPostModel = new BlogPost($db);
+$blogPostModel = new BlogPost($db, $container);
 
 // Inject the PDO instance into the ResourceExists model
 $resourceExistsModel = new ResourceExists($db);
 
+
 // Inject the BlogPost model into the controller
-$blogPostController = new BlogPostController($blogPostModel, $resourceExistsModel);
+$blogPostController = new BlogPostController($blogPostModel, $resourceExistsModel, $container);
 
 /**
  * Get all our posts from the database
@@ -46,7 +51,7 @@ $app->post('/posts/create', [$blogPostController, 'createPost']);
 /**
  * Edit/Update a post from the api to the database, using PATCH
  */
-$app->patch('/posts/edit/{id:\d+}', [$blogPostController, 'updatePost']);
+$app->patch('/posts/edit/{id:\d+}', [$blogPostController, 'patchPost']);
 
 
 /**

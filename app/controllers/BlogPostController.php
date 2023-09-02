@@ -13,17 +13,28 @@ use App\Validation\Validator;
 
 use OpenApi\Annotations as OA;
 
+// necessary imports for the logging functionality
+use Psr\Container\ContainerInterface; 
+use Laminas\Log\Logger;
+
+
 class BlogPostController
 {
 
     protected $blog_post;
     protected $resource_exists;
 
+    protected $container;
+    protected $logger;
 
-    public function __construct(BlogPost $blog_post, ResourceExists $resource_exists)
+
+    public function __construct(BlogPost $blog_post, ResourceExists $resource_exists, ContainerInterface $container)
     {
         $this->blog_post = $blog_post;
         $this->resource_exists = $resource_exists;
+
+        $this->container = $container;
+        $this->logger = $container->get(Logger::class);
     }
 
     /**
@@ -45,7 +56,7 @@ class BlogPostController
     {
 
         $all_data = $this->blog_post->getAll();
-
+        
         if (isset($all_data['error'])) {
             $error = ['error' => $all_data['error']];
             $response->getBody()->write(json_encode($error));
@@ -127,7 +138,7 @@ class BlogPostController
      */
     public function getBySlug(Request $request, Response $response, array $args): Response
     {
-        $slug = $args['slug'];
+        $slug = htmlspecialchars($args['slug']);
 
         // Check if the resource exists for posts using the model method
         $post = $this->blog_post->getBySlug($slug);
@@ -147,7 +158,10 @@ class BlogPostController
                 "message" => "Resource not found with this slug.",
                 "resource-slug" => $slug
             );
+
+            $this->logger->info('Status 404: Resource not found with this slug.');
             return CustomResponse::respondWithError($response, $errorResponse, 404);
+            
         }
 
         $response->getBody()->write(json_encode($post));
@@ -200,7 +214,10 @@ class BlogPostController
             // Invalid JSON data
             $errorResponse = array("error-message" => "Invalid JSON data");
             $response->getBody()->write(json_encode($errorResponse));
+
+            $this->logger->info('Status 400: Invalid JSON data (Bad request).');
             return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
+            
         }
         
         // Get the values from the decoded JSON data and sanitize
@@ -248,7 +265,9 @@ class BlogPostController
         if($validator->failed())
         {
             $responseMessage = $validator->errors;
-            return $customResponse->is400Response($response,$responseMessage);
+
+            $this->logger->info('Status 400: Failed Validation (Bad request).');
+            return $customResponse->is400Response($response,$responseMessage);  
         }
 
 
@@ -321,7 +340,7 @@ class BlogPostController
      *     )
      * )
      */
-    public function updatePost(Request $request, Response $response, array $args): Response
+    public function patchPost(Request $request, Response $response, array $args): Response
     {
         // Get the id from the URL parameters
         // This format is used if we choose to include "array $args" as part of our argument above
@@ -335,6 +354,7 @@ class BlogPostController
         // Check if JSON decoding was successful
         if ($data === null) {
             $errorResponse = array("error-message" => "Invalid JSON data");
+            $this->logger->info('Status 400: Invalid JSON data (Bad request).');
             return CustomResponse::respondWithError($response, $errorResponse, 400);
         }
        
@@ -345,6 +365,8 @@ class BlogPostController
                 "message" => "Resource not found with this ID.",
                 "resource-id" => $id
             );
+
+            $this->logger->info('Status 404: Resource not found with this ID.');
             return CustomResponse::respondWithError($response, $errorResponse, 404);
         }
 
@@ -398,6 +420,8 @@ class BlogPostController
                 "message" => "Resource not found with this ID.",
                 "resource-id" => $id
             );
+
+            $this->logger->info('Status 404: Resource not found with this ID.');
             return CustomResponse::respondWithError($response, $errorResponse, 404);
         }
 
