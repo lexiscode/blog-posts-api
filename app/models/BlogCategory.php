@@ -5,14 +5,23 @@ namespace App\Models;
 use PDO;
 use PDOException;
 
+// necessary imports for the logging functionality
+use Psr\Container\ContainerInterface; 
+use Laminas\Log\Logger;
 
 class BlogCategory
 {
     protected $db;
 
-    public function __construct(PDO $db)
+    protected $container;
+    protected $logger;
+
+    public function __construct(PDO $db, ContainerInterface $container)
     {
         $this->db = $db;
+
+        $this->container = $container;
+        $this->logger = $container->get(Logger::class);
     }
 
     /**
@@ -30,6 +39,7 @@ class BlogCategory
             return $categories;
 
         } catch (PDOException $e) {
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
 
@@ -67,6 +77,7 @@ class BlogCategory
             return $result;
        
         }catch (PDOException $e){
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
     }
@@ -100,6 +111,7 @@ class BlogCategory
             return $isDataInserted;
 
         } catch (PDOException $e) {
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
     }
@@ -114,7 +126,7 @@ class BlogCategory
         // Build the SET clause and parameter bindings for the update
         foreach ($data as $field => $value) {
             if ($field === 'name') {
-                $value = filter_var($value, FILTER_SANITIZE_STRING);
+                $value = htmlspecialchars($value);
             } elseif ($field === 'description') {
                 $value = htmlspecialchars($value);
             } 
@@ -141,8 +153,6 @@ class BlogCategory
 
             $isDataUpdated = $stmt->execute();
 
-            // $db = null;
-
             if (empty($isDataUpdated)) {
                 // Handle the case of no matching post
                 $errorResponse = array(
@@ -155,10 +165,11 @@ class BlogCategory
             return $isDataUpdated;
        
         } catch (PDOException $e) {
-
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
     }
+
 
     public function putData($id, $name, $description)
     {
@@ -177,11 +188,10 @@ class BlogCategory
 
             $isDataUpdated = $stmt->execute();
 
-            // $db = null;
-
             return $isDataUpdated;
 
         } catch (PDOException $e) {
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
     }
@@ -196,11 +206,10 @@ class BlogCategory
             $stmt->bindValue(':id', $id, PDO::PARAM_INT);
             $isDataDeleted = $stmt->execute();
 
-            // $db = null;
-
             return $isDataDeleted;
                 
         } catch (PDOException $e) {
+            $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
     }

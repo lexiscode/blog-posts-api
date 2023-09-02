@@ -13,6 +13,10 @@ use App\Validation\Validator;
 
 use OpenApi\Annotations as OA;
 
+// necessary imports for the logging functionality
+use Psr\Container\ContainerInterface; 
+use Laminas\Log\Logger;
+
 
 class BlogCategoryController
 {
@@ -20,11 +24,16 @@ class BlogCategoryController
     protected $blog_category;
     protected $resource_exists;
 
+    protected $container;
+    protected $logger;
 
-    public function __construct(BlogCategory $blog_category, ResourceExists $resource_exists)
+    public function __construct(BlogCategory $blog_category, ResourceExists $resource_exists, ContainerInterface $container)
     {
         $this->blog_category = $blog_category;
         $this->resource_exists = $resource_exists;
+
+        $this->container = $container;
+        $this->logger = $container->get(Logger::class);
     }
 
     /**
@@ -139,6 +148,8 @@ class BlogCategoryController
             // Invalid JSON data
             $errorResponse = array("error-message" => "Invalid JSON data");
             $response->getBody()->write(json_encode($errorResponse));
+
+            $this->logger->info('Status 400: Invalid JSON data (Bad request).');
             return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
         }
 
@@ -160,6 +171,8 @@ class BlogCategoryController
         if($validator->failed())
         {
             $responseMessage = $validator->errors;
+
+            $this->logger->info('Status 400: Failed validation (Bad request).');
             return $customResponse->is400Response($response,$responseMessage);
         }
 
@@ -244,6 +257,8 @@ class BlogCategoryController
         // Check if JSON decoding was successful
         if ($data === null) {
             $errorResponse = array("error-message" => "Invalid JSON data");
+
+            $this->logger->info('Status 400: Invalid JSON data (Bad request).');
             return CustomResponse::respondWithError($response, $errorResponse, 400);
         }
        
@@ -254,6 +269,8 @@ class BlogCategoryController
                 "message" => "Resource not found with this ID.",
                 "resource-id" => $id
             );
+
+            $this->logger->info('Status 404: Resource not found with this ID.');
             return CustomResponse::respondWithError($response, $errorResponse, 404);
         }
 
@@ -323,6 +340,7 @@ class BlogCategoryController
         // Check if JSON decoding was successful
         if ($data === null) {
             $errorResponse = array("error-message" => "Invalid JSON data");
+            $this->logger->info('Status 400: Invalid JSON data (Bad request).');
             return CustomResponse::respondWithError($response, $errorResponse, 400);
         }
 
@@ -344,6 +362,7 @@ class BlogCategoryController
         if($validator->failed())
         {
             $responseMessage = $validator->errors;
+            $this->logger->info('Status 400: Failed validation (Bad request).');
             return $customResponse->is400Response($response,$responseMessage);
         }
        
@@ -354,6 +373,8 @@ class BlogCategoryController
                 "message" => "Resource not found with this ID.",
                 "resource-id" => $id
             );
+
+            $this->logger->info('Status 404: Resource not found with this ID.');
             return CustomResponse::respondWithError($response, $errorResponse, 404);
         }
 
@@ -407,6 +428,8 @@ class BlogCategoryController
                 "message" => "Resource not found with this ID.",
                 "resource-id" => $id
             );
+
+            $this->logger->info('Status 404: Resource not found with this ID.');
             return CustomResponse::respondWithError($response, $errorResponse, 404);
         }
 
