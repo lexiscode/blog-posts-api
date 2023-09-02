@@ -62,7 +62,13 @@ php -S localhost:200
 ```
 
 ### API Testing with Postman
-The API can be tested using Postman. You can view or fork my collection via this link https://elements.getpostman.com/redirect?entityId=29003381-116c0a6b-9dd8-4c13-afb7-2bfdfc4fdf67&entityType=collection 
+The API can be tested using Postman. But note that you will need to first create a JWT token (by creating an account) in order to gain access to the resources. Once you've registered, and then logged in, a JWT Bearer Token will be given to you. 
+
+Go to the Authentication tab, and select type "Bearer Token", then copy and paste the token inside the Token input filed you will see at the right side. You have a limit of 2 hours maximum, to gain access via the token.
+
+### API Testing with Swagger
+The API can be tested using Swagger UI also. In your browser, visit http://localhost:200/docs/
+NB: For now to gain access to the resource and to bypass authentication, go inside my public/index.php file and "comment" code line 69 (i.e. require __DIR__ . '/../middleware/jwt_proxy.php';)
 
 ### Create an Account and Login
 Use the following endpoint to create a user account and also login in order to generate an authorization "Bearer Token":
@@ -140,6 +146,12 @@ Sample JSON pretty-read output:
   GET /posts/slug/{slug}
   ```
 
+### Create new Post
+Use the following endpoint to update a blog post:
+```
+POST /posts/create
+```
+
 ### Updating a Post
 Use the following endpoint to update a blog post:
 ```
@@ -149,7 +161,7 @@ PATCH /posts/edit/{id}
 ### Deleting a Post
 Use the following endpoint to delete a blog post:
 ```
-DELETE /posts/delete/{id}
+DELETE /posts/{id}
 ```
 
 ### Managing Categories
@@ -163,21 +175,27 @@ DELETE /posts/delete/{id}
   GET /categories
   ```
 
+- Retrieve category by id:
+  ```
+  GET /categories/{id}
+  ```
+
 - Update a category:
   ```
   PATCH /categories/edit/{id}
+  PUT /categories/edit/{id}
   ```
 
 - Delete a category:
   ```
-  DELETE /categories/delete/{id}
+  DELETE /categories/{id}
   ```
 
 ## Thumbnail Handling
 Thumbnail images are sent as Base64-encoded data in the JSON request body when creating a post. The API handles decoding and saving the images to the server.
 
 ## API Documentation
-The API endpoints and their usage are documented using Swagger and can be accessed by running the server and visiting `http://localhost:your-port/api-docs`.
+The API endpoints and their usage are documented using Swagger and can be accessed by running the server and visiting `http://localhost:your-port/docs/`.
 
 ## Contributing
 Contributions are welcome! Please follow the CONTRIBUTING guidelines.

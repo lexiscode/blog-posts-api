@@ -48,7 +48,7 @@ class Auth
             $secret_key = "SpslTAT3s09W9LjOgt9LQ7VTpSYsZoGD5Zcg0oK3x5U="; 
             $payload = [
                 "email" => $email,
-                "exp" => time() + 3600, // Token expiration time (1 hour)
+                "exp" => time() + 7200, // Token expiration time (2 hours)
             ];
             $token = JWT::encode($payload, $secret_key);
 
