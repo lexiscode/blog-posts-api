@@ -86,6 +86,18 @@ Sample JSON request body:
 
 ```
 
+### Creating a Base64 image file
+```
+<?php
+
+$imagePath = '/path/to/image.jpg';
+$imageData = file_get_contents($imagePath);
+$base64EncodedImage = base64_encode($imageData);
+
+echo $base64EncodedImage;
+```
+NB: Echo it out with your browser, so you can copy the long encoded texts properly. (Don't copy it via your terminal)
+
 ### Creating a Post
 Use the following endpoint to create a new blog post:
 ```
