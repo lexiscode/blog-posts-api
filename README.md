@@ -41,13 +41,21 @@ This backend API has been meticulously designed to fulfill these requirements an
 - MySQL or compatible database
 
 ### Installation
-1. Clone the repository:
+
+1. Make sure you have PHP installed on your system.
+2. Start the phpMyAdmin Apache and MySQL server 
+3. Clone the repository to your local machine, inside your xampp/htdocs directory:
    ```
    git clone https://github.com/lexiscode/blog-posts-api.git
    cd blog-posts-api
    ```
-
-2. Install dependencies:
+4. Open the repository with your VS Code IDE (or any other IDEs).
+5. Open a browser and go to URL http://localhost/phpmyadmin/
+6. Then inside your phpMyAdmin, click on the "Databases" tab.
+7. Create a database naming “restful-api-slim” and then click on the "Import" tab.
+8. Click on "browse file" and select the “restful-api-slim.sql” file which is inside this project repository, specifically inside the "db" directory.
+9. Click on "Go". 
+10. Return back to your IDE and inside your terminal install dependencies by running this command:
    ```
    composer install
    ```
@@ -55,29 +63,25 @@ This backend API has been meticulously designed to fulfill these requirements an
 ## Usage
 
 ### Starting the Local Server
+
 To start the local server, navigate to the `public` directory and run the following command:
 ```
 cd public
 php -S localhost:200
 ```
+NB: Please use this exact default recommended local server URL provided above, for simplicity sake of this my README content.
 
 ### API Testing with Postman
-The API can be tested using Postman. But note that you will need to first create a JWT token (by creating an account) in order to gain access to the resources. Once you've registered, and then logged in, a JWT Bearer Token will be given to you. 
 
-Go to the Authentication tab, and select type "Bearer Token", then copy and paste the token inside the Token input filed you will see at the right side. You have a limit of 2 hours maximum, to gain access via the token.
+The API can be tested using Postman. But note that you will need to first create a JWT authentication token (by creating an account) in order to gain access to the blog resources. Once you've registered, then logged in, and a JWT Bearer Token will be given to you. 
 
-### API Testing with Swagger
-The API can be tested using Swagger UI also. In your browser, visit http://localhost:200/docs/
-NB: For now to gain access to the resource and to bypass authentication, go inside my public/index.php file and "comment" code line 69 (i.e. require __DIR__ . '/../middleware/jwt_proxy.php';)
-
-### Create an Account and Login
 Use the following endpoint to create a user account and also login in order to generate an authorization "Bearer Token":
 ```
 POST /register
 POST /login
 ```
 
-Sample JSON request body:
+Sample JSON request body for both the registeration and login, only email and password fields:
 ```json
 {
   "email": "email@example.com",
@@ -86,7 +90,21 @@ Sample JSON request body:
 
 ```
 
+You logged in? If yes! Go to the Authentication tab, and select type "Bearer Token", then copy and paste the bearer token given to you (from inside the response output) to the input field you will see at the right side (still within the Authentication tab of Postman). You have a limit of 2 hours maximum, to gain access to the blog resources via this token.
+
+NB: You have to remain in this one particular tab to test all requests, the token grants access to only a single Postman tab, so don't open multiple tabs.
+
+### API Testing with Swagger
+
+The API can be tested using Swagger UI also. In your browser, by default you can visit this url which I believe is still your current running local server and exact port number: http://localhost:200/docs/
+
+NB: For now to gain access to the blog resource and to bypass authentication in Swagger, first go inside my public/index.php file and "comment" code line 69 (i.e. where I wrote this: require __DIR__ . '/../middleware/jwt_proxy.php';)
+
+
 ### Creating a Base64 image file
+
+I've made for you a base64 image content located in this repository, named "base64Sample.txt". But if you would like to create your own base64 image file content yourself, follow these steps below:
+
 ```
 <?php
 
@@ -96,7 +114,7 @@ $base64EncodedImage = base64_encode($imageData);
 
 echo $base64EncodedImage;
 ```
-NB: You can do this in a separate php index file. Echo it out with your browser, so you can copy the long encoded texts properly. (Don't copy it via your terminal)
+NB: Use the above code snippet and do this in a new separate php index file (preferrably creating a separate PHP repository for this). Run a local server also so it can echo (or print) out from within your browser, then double/triple tap on it so you can copy the long encoded texts properly. (Pls do not copy it encoded texts via your terminal, it would break the texts)
 
 ### Creating a Post
 Use the following endpoint to create a new blog post:
@@ -110,7 +128,7 @@ Sample JSON request body:
   "title": "Sample Title",
   "slug": "sample-title",
   "content": "Sample content.",
-  "thumbnail": "base64-encoded-image-data",
+  "thumbnail": "base64-long-encoded-image-data",
   "author": "John Doe",
   "categories": [1, 2]
 }
@@ -150,6 +168,8 @@ Sample JSON pretty-read output:
     }
   ]
 }
+
+NB: You can view your newly created thumbnail image from within public/thumbnails directory. Or you can as well view the image by running this in your browser http://localhost:200/thumbnails/image-name.png
 
 ```
 
