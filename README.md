@@ -98,7 +98,7 @@ NB: You have to remain in this one particular tab to test all requests, the toke
 
 The API can be tested using Swagger UI also. In your browser, by default you can visit this url which I believe is still your current running local server and exact port number: http://localhost:200/docs/
 
-NB: For now to gain access to the blog resource and to bypass authentication in Swagger, first go inside my public/index.php file and "comment" code line 69 (i.e. where I wrote this: require __DIR__ . '/../middleware/jwt_proxy.php';)
+NB: For now to gain access to the blog resource and to bypass authentication in Swagger, first go inside my public/index.php file and "comment" code line 69 (i.e. where I wrote this: require __DIR__ . '/../middleware/jwt_proxy.php';). In this note, for now, don't bother testing the Authentication section (i.e. the register and login sections) in the Swagger UI, focus on the Posts and Categories sections.
 
 
 ### Creating a Base64 image file
