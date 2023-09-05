@@ -109,7 +109,7 @@ class BlogCategoryController
 
     /**
      * @OA\Post(
-     *     path="/categories/create",
+     *     path="/categories",
      *     summary="Create a new blog category",
      *     tags={"Categories"},
      *     @OA\RequestBody(

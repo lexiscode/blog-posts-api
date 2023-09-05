@@ -171,7 +171,7 @@ class BlogPostController
 
     /**
      * @OA\Post(
-     *     path="/posts/create",
+     *     path="/posts",
      *     summary="Create a new blog post",
      *     tags={"Posts"},
      *     @OA\RequestBody(

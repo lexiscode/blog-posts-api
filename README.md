@@ -181,7 +181,7 @@ NB: You can view your newly created thumbnail image from within public/thumbnail
 ### Create new Post
 Use the following endpoint to update a blog post:
 ```
-POST /posts/create
+POST /posts
 ```
 
 ### Updating a Post
@@ -199,7 +199,7 @@ DELETE /posts/{id}
 ### Managing Categories
 - Create a new category:
   ```
-  POST /categories/create
+  POST /categories
   ```
 
 - Retrieve all categories:

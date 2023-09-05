@@ -29,7 +29,7 @@ $app->get('/categories', [$blogCategoryController, 'getAllCategories']);
 $app->get('/categories/{id:\d+}', [$blogCategoryController, 'getCategoryById']);
 
 // Create categories from the api to the database
-$app->post('/categories/create', [$blogCategoryController, 'createCategory']);
+$app->post('/categories', [$blogCategoryController, 'createCategory']);
 
 // Edit/Update a categories from the api to the database, using PUT
 $app->put('/categories/edit/{id:\d+}', [$blogCategoryController, 'putCategory']);

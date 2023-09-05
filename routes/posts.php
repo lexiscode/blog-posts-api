@@ -41,7 +41,7 @@ $app->get('/posts/slug/{slug}', [$blogPostController, 'getBySlug']);
 /**
  * Create post from the api to the database
  */
-$app->post('/posts/create', [$blogPostController, 'createPost']);
+$app->post('/posts', [$blogPostController, 'createPost']);
 
 /**
  * Edit/Update a post from the api to the database, using PATCH
