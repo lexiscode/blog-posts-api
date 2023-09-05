@@ -13,6 +13,7 @@ As part of the project requirements, the following functionalities have been imp
 - **Category Association**: Multiple categories can be added to a single post, catering to the scenario where one post may belong to multiple categories.
 - **JWT Authentication**: Users are required to register and log in to generate JWT tokens, ensuring secure access to protected routes.
 - **Registration and Login Validations**: Input data for registration and login is validated to ensure data integrity and security.
+- **Logger**: Security related events, such as failed login attempts or suspicious activities, which can aid in identifying and responding to potential security threats are being logged in a separate log file.
 - **API Documentation**: Comprehensive API documentation has been generated using Swagger, providing insights into available endpoints and their usage.
 
 This backend API has been meticulously designed to fulfill these requirements and serve as a reliable foundation for the blog's frontend development. By adhering to REST principles, the API ensures seamless communication and data exchange between the frontend and backend components.
@@ -119,7 +120,7 @@ NB: Use the above code snippet and do this in a new separate php index file (pre
 ### Creating a Post
 Use the following endpoint to create a new blog post:
 ```
-POST /posts/create
+POST /posts
 ```
 
 Sample JSON request body:
