@@ -57,9 +57,11 @@ $app->get('/openapi', function (Request $request, Response $response) {
     require '/openapi/index.php';
 });
 
-// Define a route for API documentation
+
+// Define a route for the root URL
 $app->get('/', function (Request $request, Response $response) {
-    echo 'Welcome to Lexis BlogAPI';
+    $response->getBody()->write("Hello there, this is Lexis BlogPost API!");
+    return $response;
 });
 
 
@@ -72,7 +74,7 @@ require __DIR__ . '/../routes/categories.php';
 
 
 /* JWT Authentication Middleware */
-require __DIR__ . '/../middleware/jwt_proxy.php';
+//require __DIR__ . '/../middleware/jwt_proxy.php';
 
 
 /* This below handles all 404 routes error response */
