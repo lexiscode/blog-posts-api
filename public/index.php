@@ -50,10 +50,16 @@ $app = AppFactory::createFromContainer($container);
 
 
 
+
 // Define a route for API documentation
 $app->get('/openapi', function (Request $request, Response $response) {
     // Include the code to generate and return the OpenAPI documentation here
     require '/openapi/index.php';
+});
+
+// Define a route for API documentation
+$app->get('/', function (Request $request, Response $response) {
+    echo 'Welcome to Lexis BlogAPI';
 });
 
 

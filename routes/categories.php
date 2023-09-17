@@ -6,7 +6,7 @@ use App\Models\ResourceExists;
 use App\Models\Database\DbConnect;
 
 
-// Create a PDO instance for database connection
+// Create a PDO instance for database, and gets the connection
 $db = (new DbConnect())->getConn();
 
 // Retrieve the ContainerInterface from the Slim app container

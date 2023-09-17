@@ -47,7 +47,7 @@ class ResourceExists
             $stmt->execute();
 
             $rowCount = $stmt->fetchColumn();
-            return $rowCount > 0;
+            return $rowCount > 0; // returns true
         } catch (PDOException $e) {
             // Return false to indicate resource does not exist
             return false;
