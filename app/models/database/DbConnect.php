@@ -31,7 +31,7 @@ class DbConnect
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
         ];
-        
+
         try {
             $conn = new PDO($dsn, $db_user, $db_passwd, $options);
             return $conn;
@@ -42,3 +42,5 @@ class DbConnect
         }
     }
 }
+
+

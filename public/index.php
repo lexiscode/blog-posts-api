@@ -16,13 +16,9 @@ use Dotenv\Dotenv;
 require __DIR__ . '/../vendor/autoload.php';
 
 
-
 // DotENV configuration
 $dotenv = Dotenv::createImmutable(__DIR__ . "/..");
 $dotenv->safeLoad();
-
-// Load the configuration settings from settings.php
-$settings = require __DIR__ . '/../config/settings.php';
 
 
 // Create a new Slim app instance, below was used without the logger being considered
@@ -74,7 +70,7 @@ require __DIR__ . '/../routes/categories.php';
 
 
 /* JWT Authentication Middleware */
-//require __DIR__ . '/../middleware/jwt_proxy.php';
+require __DIR__ . '/../middleware/jwt_proxy.php';
 
 
 /* This below handles all 404 routes error response */
