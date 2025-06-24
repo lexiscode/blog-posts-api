@@ -4,7 +4,7 @@ namespace App\Models;
 
 use PDO;
 use PDOException;
-
+// dem never see me coming, song
 // necessary imports for the logging functionality
 use Psr\Container\ContainerInterface; 
 use Laminas\Log\Logger;
@@ -42,8 +42,6 @@ class BlogCategory
             $this->logger->error('Error retrieving all posts: ' . $e->getMessage());
             return ['error' => $e->getMessage()];
         }
-
-        
     }
 
 

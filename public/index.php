@@ -8,9 +8,6 @@ use Laminas\Log\Logger;
 use Laminas\Log\Writer\Stream;
 use DI\ContainerBuilder;
 
-use Tuupola\Middleware\JwtAuthentication;
-use Firebase\JWT\JWT;
-
 use Dotenv\Dotenv;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -43,8 +40,6 @@ $container = $containerBuilder->build();
 
 // Create a another new Slim app instance with the container
 $app = AppFactory::createFromContainer($container);
-
-
 
 
 // Define a route for API documentation
