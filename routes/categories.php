@@ -12,7 +12,7 @@ $db = (new DbConnect())->getConn();
 // Retrieve the ContainerInterface from the Slim app container
 $container = $app->getContainer();
 
-// Inject the PDO instance into the BlogPost model
+// Inject the PDO instance into the BlogCategory model
 $blogCategoryModel = new BlogCategory($db, $container);
  
 // Inject the PDO instance into the ResourceExists model

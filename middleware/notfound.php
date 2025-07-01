@@ -1,13 +1,18 @@
 <?php
 
+use Slim\Psr7\Response;
+use App\Controllers\NotFoundController;
+use Slim\Exception\HttpNotFoundException;
+use Psr\Http\Message\ServerRequestInterface;
+
 // This below handles all 404 routes error response
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 $errorMiddleware->setErrorHandler(
-    Slim\Exception\HttpNotFoundException::class, 
-    function (Psr\Http\Message\ServerRequestInterface $request) {
-        $response = new \Slim\Psr7\Response(); // Create a concrete Response object
-        $controller = new \App\Controllers\NotFoundController(); // instantiate the controller class
+    HttpNotFoundException::class, 
+    function (ServerRequestInterface $request) {
+        $response = new Response(); 
+        $controller = new NotFoundController(); 
         return $controller->notFound($request, $response);
     }
 );

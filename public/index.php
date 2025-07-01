@@ -38,7 +38,7 @@ $containerBuilder->addDefinitions([
 // Build the container
 $container = $containerBuilder->build();
 
-// Create a another new Slim app instance with the container
+// Create a new Slim app instance with the container
 $app = AppFactory::createFromContainer($container);
 
 
